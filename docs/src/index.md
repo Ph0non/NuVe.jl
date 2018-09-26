@@ -13,3 +13,8 @@ Todo
 Modules = [NuVe]
 Order   = [:function, :type]
 ```
+
+## Index
+
+```@index
+```

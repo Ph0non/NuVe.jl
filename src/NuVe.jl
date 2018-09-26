@@ -5,7 +5,9 @@ using NamedArrays
 #using JuMP
 #using Cbc
 
-include("database.jl")
+include("types.jl")
 include("utilities.jl")
+include("database.jl")
+include("decay.jl")
 
 end
