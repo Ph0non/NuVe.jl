@@ -1,13 +1,14 @@
 """
 In diesem Type sind grundlegenden Einstellungen gespeichert. Dazu gehören
-der Name des Nuklidvektors, der Berechnungszeitraum, das Optimierungsziel
-und die zu berücksichtigen Messgeräte.
+der Name des Nuklidvektors, der Berechnungszeitraum, das Optimierungsziel,
+die zu berücksichtigen Messgeräte und ein möglicher Schwellenwert.
 """
 struct Settings
-  nv::String
+  nv::Symbol
   year::Array{Int64}
-  gauge::Array{String}
-  target::String
+  gauge::Array{Symbol}
+  target::Symbol
+  treshold::Real
 end
 
 """
@@ -16,8 +17,9 @@ Nuklidvektors. Dazu gehören das einzuschränkende Nuklid, das Relationszeichen,
 die Grenze und eine Wichtung.
 """
 struct Constraint
-  name::String
-  relation::String
+  nuclide::Symbol
+  relation::Symbol
   limit::Float64
   weight::Float64
+
 end
