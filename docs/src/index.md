@@ -7,11 +7,18 @@
 
 Todo
 
-## Functions
+## Funktionen
 
 ```@autodocs
 Modules = [NuVe]
-Order   = [:function, :type]
+Order   = [:function]
+```
+
+## Typen
+
+```@autodocs
+Modules = [NuVe]
+Order   = [:type]
 ```
 
 ## Index
