@@ -1,7 +1,7 @@
 module NuVe
 
 using SQLite
-using NamedArrays
+# using NamedArrays
 #using JuMP
 #using Cbc
 

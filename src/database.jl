@@ -5,6 +5,9 @@ if isfile("nvdb-v3.sqlite")
     "Die Namen aller verwendeten Nuklide"
     global nu_names = map(x -> String(x),
 						SQLite.query(nvdb, "select nuclide from nuclide_decayType")[:,1])
+
+	"Die Halbwertszeiten aller Nuklide"
+	const hl = SQLite.query(nvdb, "select " * array2string(nu_names) * " from halflife");
 end
 
 
