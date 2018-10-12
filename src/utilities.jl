@@ -16,24 +16,14 @@ function getSampleInfo(x::String, nv::Symbol)
 	SQLite.query(nvdb, "select " * x * " from nv_source join nv_summary on nv_source.nv_id = nv_summary.nv_id where NV = '" * (nv |> String) *"'")
 end
 
-function dataframe2array()
+"""
+	df2array(x::DataFrame)
 
+Wandelt ein `DataFrame` in ein `Array{Any,2}` um.
+"""
+function df2array(x::DataFrame)
+	convert(Array, x)
 end
-
-# function fillWithZero(x)
-# 	(el_i,el_j) = size(x)
-# 	y = Array{ Float64 }(el_i, el_j)
-# 	for j=1:el_j
-# 		for i=1:el_i
-# 			if ismissing(x[i, j])
-# 				y[i, j] = 0
-# 			else
-# 				y[i, j] = x[i, j]
-# 			end
-# 		end
-# 	end
-# 	return y
-# end
 
 """
 	travec(x::Array)

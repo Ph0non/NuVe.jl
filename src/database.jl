@@ -39,3 +39,16 @@ function get_nuclide_types(t::String)
         SQLite.query(nvdb,  "select nuclide from nuclide_decayType where decayType = '" * t * "'" )
         |> DataFrame )
 end
+
+"""
+	getSampleFromSource(x::Symbol)
+
+Ruft alle vorhanden Proben zu einem Nuklidvektor ab.
+"""
+function getSampleFromSource(nv::Symbol)
+	q = SQLite.query(nvdb, "select s_id, date, " * array2string(nu_names) *
+	" from nv_source join nv_summary on nv_source.nv_id = nv_summary.nv_id where NV = '" *
+	(nv |> string) * "'")
+	q.date = map(x->Date(x, "dd.mm.yyyy"), q.date)
+	return q
+end
