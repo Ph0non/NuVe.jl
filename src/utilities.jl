@@ -28,8 +28,32 @@ end
 """
 	travec(x::Array)
 
-Transponiert einen Vektor (`n × 1`) zu (`1 × n`)
+Transponiert einen Vektor (`n × 1`) zu (`1 × n`).
 """
 function travec(x::Array)
 	reshape(x, 1, length(x))
 end
+
+"""
+	 removeMissing(x::DataFrame)
+
+Ersetzt in einem DataFrame alle `missing` durch 0.
+"""
+function removeMissing(x::DataFrame)
+	for i in map(y -> Symbol(y), nu_names)
+		x[i] = coalesce.(x[i], 0)
+	end
+	return x
+end
+
+
+function nuclide_parts(x::Dict)
+	keys(x)
+	samples_korr./sum(samples_korr,2)
+end
+
+Dataframe
+q = [1, 2, missing]
+
+convert(Array, decay_correction())
+sum(skipmissing(q["2019"].Co60))
