@@ -1,7 +1,8 @@
 module NuVe
 
 using SQLite
-# using NamedArrays
+using DataFrames # braucht nur describe
+using NamedArrays
 #using JuMP
 #using Cbc
 
