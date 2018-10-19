@@ -3,7 +3,7 @@ function array2string(x::Array{String, 1})
 end
 
 function array2string(x::Array{<:Number, 1})
-	x = map(y -> string(y), x)
+	x = String.(x)
 	array2string(x)
 end
 
@@ -40,20 +40,30 @@ end
 Ersetzt in einem DataFrame alle `missing` durch 0.
 """
 function removeMissing(x::DataFrame)
-	for i in map(y -> Symbol(y), nu_names)
+	for i in Symbol.(nu_names)
 		x[i] = coalesce.(x[i], 0)
 	end
 	return x
 end
 
+"""
+	df2namedarray(x::DataFrame, rowname::String, columnname::String)
 
-function nuclide_parts(x::Dict)
-	keys(x)
-	samples_korr./sum(samples_korr,2)
+Diese Funktion wandelt einen `DataFrame` in ein `Array{Float64, 2}` um.
+Potentiell fehlende Werte werden durch 0 ersetzt.
+"""
+function df2namedarray(x::DataFrame, rowname::String, columnname::String)
+	NamedArray(convert(Array{Float64, 2}, removeMissing(x)[names(x)[2:end]]),
+		( String.(x[1]), String.(names(x))[2:end] ),
+		(rowname, columnname) )
 end
 
-Dataframe
-q = [1, 2, missing]
+"""
+	nuclide_parts(x::NamedArrays.NamedArray)
 
-convert(Array, decay_correction())
-sum(skipmissing(q["2019"].Co60))
+Gibt ein NamedArray mit den Nuklidanteilen wieder. Die Summe aller Nuklide über
+jeder Probe ergibt 1.
+"""
+function nuclide_parts(x::NamedArrays.NamedArray)
+	x./sum(x, dims=2)
+end

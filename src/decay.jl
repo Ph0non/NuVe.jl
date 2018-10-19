@@ -6,7 +6,7 @@ using Dates
 Ruft das Probenahmedatum bzw. Referenzdatum zu allen Proben eines Nuklidvektors ab.
 """
 function getSampleDate(nv::Symbol)
-	map(x->Date(x, "dd.mm.yyyy"), getSampleInfo("date", nv)[1] )
+	Date.(getSampleInfo("date", nv)[1], "dd.mm.yyyy")
 end
 
 function getRefDate(x::RefDate)
@@ -61,7 +61,7 @@ Diese Funktion gibt die zerfallskorrigierte Eingangsgröße der Proben eines
 gewählten Nuklidvektors im bei [`Settings`](@ref) angegeben Zeitraum zurück.
 """
 function decay_correction(sample::DataFrame, year::Array{Int64, 1})
-	sample_array = df2array(sample[map(x -> Symbol(x), nu_names)])
+	sample_array = df2array(sample[Symbol.(nu_names)])
 	diff_days = map(x -> x.value, diffDays(sample.date, year))
 	hl_array = convert(Array{Float64}, hl)
 
