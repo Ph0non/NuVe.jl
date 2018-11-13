@@ -67,3 +67,10 @@ jeder Probe ergibt 1.
 function nuclide_parts(x::NamedArrays.NamedArray)
 	x./sum(x, dims=2)
 end
+
+function calc_factors(x::NamedArrays.NamedArray)
+	a = 1 ./ (x * fᵀ)
+	∑Co60Eq = x * ɛᵀ
+
+	return a, ∑Co60Eq
+end
