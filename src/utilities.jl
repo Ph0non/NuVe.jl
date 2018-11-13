@@ -68,6 +68,11 @@ function nuclide_parts(x::NamedArrays.NamedArray)
 	x./sum(x, dims=2)
 end
 
+"""
+	calc_factors(x::NamedArrays.NamedArray)
+
+Berechnet die noch fehlenden Faktoren für die zu lösende Ungleichung.
+"""
 function calc_factors(x::NamedArrays.NamedArray)
 	a = 1 ./ (x * fᵀ)
 	∑Co60Eq = x * ɛᵀ
