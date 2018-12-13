@@ -11,8 +11,9 @@ end
 """
 In diesem Type sind grundlegenden Einstellungen gespeichert. Dazu gehören
 der Name des Nuklidvektors, der Berechnungszeitraum, das Optimierungsziel,
-die zu berücksichtigen Messgeräte, ein möglicher Schwellenwert und das
-Referenzdatum [`RefDate`](@ref) (Tag und Monat) für die Zerfallskorrektur.
+die zu berücksichtigen Messgeräte, ein möglicher Schwellenwert, das
+Referenzdatum [`RefDate`](@ref) (Tag und Monat) für die Zerfallskorrektur und die
+zu berücksichtigenden Freigabepfade für die jeweilligen Messverfahren.
 """
 struct Settings
   nv::Symbol
@@ -21,6 +22,7 @@ struct Settings
   target::Symbol
   treshold::Real
   refDate::RefDate
+  paths::Dict
 end
 
 """
