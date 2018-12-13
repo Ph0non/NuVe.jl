@@ -40,7 +40,7 @@ end
 Ersetzt in einem DataFrame alle `missing` durch 0.
 """
 function removeMissing(x::DataFrame)
-	for i in Symbol.(nu_names)
+	for i in names(x)
 		x[i] = coalesce.(x[i], 0)
 	end
 	return x
@@ -59,23 +59,42 @@ function df2namedarray(x::DataFrame, rowname::String, columnname::String)
 end
 
 """
-	nuclide_parts(x::NamedArrays.NamedArray)
+	nuclideParts(x::NamedArrays.NamedArray)
 
 Gibt ein NamedArray mit den Nuklidanteilen wieder. Die Summe aller Nuklide über
 jeder Probe ergibt 1.
 """
-function nuclide_parts(x::NamedArrays.NamedArray)
+function nuclideParts(x::NamedArrays.NamedArray)
 	x./sum(x, dims=2)
 end
 
 """
-	calc_factors(x::NamedArrays.NamedArray)
+	CalcFactors(x::NamedArrays.NamedArray)
 
 Berechnet die noch fehlenden Faktoren für die zu lösende Ungleichung.
 """
-function calc_factors(x::NamedArrays.NamedArray)
-	a = 1 ./ (x * fᵀ)
-	∑Co60Eq = x * ɛᵀ
+function CalcFactors(x::NamedArrays.NamedArray)
+	∑xᵢdivfᵢ = x * fᵀ
+	∑εᵢxᵢ = x * ɛᵀ
 
-	return a, ∑Co60Eq
+	return ∑xᵢdivfᵢ, ∑εᵢxᵢ
+end
+
+"""
+	getNuclidesFromConstraint(x::Array{Constraint,1})
+
+Gibt alle Nuklide zurück, welche in sich in einem Array von Constraints befinden.
+"""
+function getNuclidesFromConstraint(x::Array{Constraint,1})
+	[x[i].nuclide |> String for i=1:length(x) ]
+end
+
+"""
+	getWeightsFromConstraint(x::Array{Constraint,1})
+
+Gibt alle Wichtungen der Nuklide zurück, welche in sich in einem Array von Constraints befinden.
+Diese Funktion wird beispielsweise benötigt, wenn auf die Repräsentativität der Proben optimiert werden soll. Hierbei wird die Abweichung der Nuklide des Nuklidvektors gegenüber dem Mittelwert der Nuklide der Proben minimiert.
+"""
+function getWeightsFromConstraint(x::Array{Constraint,1})
+	[x[i].weight for i=1:length(x) ]
 end
