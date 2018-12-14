@@ -5,7 +5,7 @@ using NuVe
 
 makedocs(
     sitename = "NuVe",
-    format = Documenter.Markdown(),
+    format = Documenter.HTML(),
     modules = [NuVe]
 )
 
