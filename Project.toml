@@ -18,6 +18,9 @@ JuMP = "4076af6c-e467-56ae-b986-b466b2749572"
 NamedArrays = "86f7a689-2022-50b4-a561-43c23ac3c673"
 SQLite = "0aa819cd-b072-5ff4-a722-6bc24af294d9"
 Test = "8dfed614-e22c-5e08-85e1-65c5234f0b40"
+DataFrames = "a93c6f00-e57d-5684-b7b6-d8193f3e46c0"
+Dates = "ade2ca70-3891-5945-98fb-dc099432e06a"
+Statistics = "10745b16-79ce-11e8-11f9-7d13ad32a3b2"
 
 [targets]
-test = ["Test", "JuMP", "Cbc", "SQLite", "NamedArrays"]
+test = ["Test", "JuMP", "Cbc", "SQLite", "NamedArrays", "DataFrames", "Dates", "Statistics"]
