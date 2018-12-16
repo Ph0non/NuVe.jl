@@ -21,7 +21,6 @@ end
 # if isfile(db)
 "Datenbank mit allen Nuklidvektoren, Proben, Halbwertszeiten und Freigabewerten"
 function nvdb()
-	@warn(db)
 	SQLite.DB(db)
 end
 

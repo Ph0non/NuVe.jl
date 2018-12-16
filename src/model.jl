@@ -51,5 +51,5 @@ end
 function setBound(s::Settings, m::Model, x::Array{VariableRef,1}, c::Array{Constraint,1}, ∑xᵢdivfᵢ::NamedArrays.NamedArray, ∑εᵢxᵢ::NamedArrays.NamedArray)
 	∑εᵢyᵢ = ε[s.gauge .|> String, getNuclidesFromConstraint(c)] * x
 
-	@constraint(m, [j in names(∑xᵢdivfᵢ, 1), l in keys(setting.paths), k in setting.paths[l]], ∑εᵢyᵢ[String(l)] * ∑xᵢdivfᵢ[j, k] ≤ setting.treshold * ∑εᵢxᵢ[j, String(l)] * [f[setting.paths[l], getNuclidesFromConstraint(c)] * x][1][k])
+	@constraint(m, [j in names(∑xᵢdivfᵢ, 1), l in keys(s.paths), k in s.paths[l]], ∑εᵢyᵢ[String(l)] * ∑xᵢdivfᵢ[j, k] ≤ s.treshold * ∑εᵢxᵢ[j, String(l)] * [f[s.paths[l], getNuclidesFromConstraint(c)] * x][1][k])
 end

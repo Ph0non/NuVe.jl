@@ -15,6 +15,6 @@ include("model.jl")
 export Settings, Constraint, RefDate
 
 # export functions
-export decayCorrection, df2namedarray, nuclideParts, CalcFactors, addUserConstraints, setBound, getSampleFromSource, getInterval
+export decayCorrection, df2namedarray, nuclideParts, CalcFactors, addUserConstraints, setBound, getSampleFromSource, getInterval, setObjectives
 
 end
