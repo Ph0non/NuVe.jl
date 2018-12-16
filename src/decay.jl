@@ -24,13 +24,13 @@ und einem Referenzdatum an. Das Jahr und der Referenzmonat bzw. -tag werden
 aus den Einstellungen bezogen ([`Settings`](@ref)) oder das Jahr wird separat
 angegeben.
 """
-function diffDays(sample_date::Array{Date,1})
-	(ref_month, ref_day) = Dates.monthday(Dates.DateTime(setting.refDate.date, Dates.DateFormat(setting.refDate.format)))
-	([Date(setting.year[1], ref_month, ref_day) : Dates.Year(1) : Date(setting.year[end], ref_month, ref_day);] |> travec) .- sample_date
+function diffDays(s::Settings, sample_date::Array{Date,1})
+	(ref_month, ref_day) = Dates.monthday(Dates.DateTime(s.refDate.date, Dates.DateFormat(s.refDate.format)))
+	([Date(s.year[1], ref_month, ref_day) : Dates.Year(1) : Date(s.year[end], ref_month, ref_day);] |> travec) .- sample_date
 end
 
-function diffDays(sample_date::Array{Date,1}, year::Int64)
-	(ref_month, ref_day) = Dates.monthday(Dates.DateTime(setting.refDate.date, Dates.DateFormat(setting.refDate.format)))
+function diffDays(s::Settings, sample_date::Array{Date,1}, year::Int64)
+	(ref_month, ref_day) = Dates.monthday(Dates.DateTime(s.refDate.date, Dates.DateFormat(s.refDate.format)))
 	Date(year, ref_month, ref_day) .- sample_date
 end
 
@@ -38,8 +38,8 @@ function diffDays(sample_date::Date)
 	diffDays([sample_date])
 end
 
-function diffDays(sample_date::Array{Date,1}, year::Array{Int64, 1})
-	(ref_month, ref_day) = Dates.monthday(Dates.DateTime(setting.refDate.date, Dates.DateFormat(setting.refDate.format)))
+function diffDays(s::Settings, sample_date::Array{Date,1}, year::Array{Int64, 1})
+	(ref_month, ref_day) = Dates.monthday(Dates.DateTime(s.refDate.date, Dates.DateFormat(s.refDate.format)))
 	([Date(year[1], ref_month, ref_day) : Dates.Year(1) : Date(year[end], ref_month, ref_day);] |> travec) .- sample_date
 end
 
@@ -50,8 +50,8 @@ end
 Macht aus den Einstellungen ([`Settings`](@ref)) für Anfangs- und Endjahr ein Array, welches
 zusätzlich jedes Jahr dazwischen enthält.
 """
-function getInterval()
-	[setting.year[1]:setting.year[2];]
+function getInterval(s::Settings)
+	[s.year[1]:s.year[2];]
 end
 
 """
@@ -60,9 +60,9 @@ end
 Diese Funktion gibt die zerfallskorrigierte Eingangsgröße der Proben eines
 gewählten Nuklidvektors im bei [`Settings`](@ref) angegeben Zeitraum zurück.
 """
-function decayCorrection(sample::DataFrame, year::Array{Int64, 1})
+function decayCorrection(s::Settings, sample::DataFrame, year::Array{Int64, 1})
 	sample_array = df2array(sample[Symbol.(nu_names)])
-	diff_days = map(x -> x.value, diffDays(sample.date, year))
+	diff_days = map(x -> x.value, diffDays(s, sample.date, year))
 	hl_array = convert(Array{Float64}, hl)
 
 	sample_decay = Dict()

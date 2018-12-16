@@ -11,6 +11,6 @@ makedocs(
 
 
 deploydocs(
-    repo = "github.com/Ph0non/NuVe.jl.git"
+    repo = "github.com/Ph0non/NuVe.jl.git",
     target = "build"
 )
