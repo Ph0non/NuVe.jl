@@ -7,3 +7,6 @@ docs/site/
 *.jl.mem
 
 ini_data.jl
+
+*.key
+*.ppk
