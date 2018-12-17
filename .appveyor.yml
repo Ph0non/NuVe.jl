@@ -1,6 +1,6 @@
 environment:
   matrix:
-    - julia_version: 1.0
+    - julia_version: 1.0.2
 
 platform:
   - x86
@@ -8,8 +8,10 @@ platform:
 
 branches:
   only:
-    - master
-    - /release-.*/
+    - CI
+    # - master
+    # - develop
+    # - /release-.*/
 
 notifications:
   - provider: Email
@@ -18,7 +20,12 @@ notifications:
     on_build_status_changed: false
 
 install:
-  - ps: iex ((new-object net.webclient).DownloadString("https://raw.githubusercontent.com/JuliaCI/Appveyour.jl/version-1/bin/install.ps1"))
+  - ps: iex ((new-object net.webclient).DownloadString("https://raw.githubusercontent.com/JuliaCI/Appveyor.jl/version-1/bin/install.ps1"))
+
+# build: off
+build_script:
+  - echo "%JL_BUILD_SCRIPT%"
+  - C:\julia\bin\julia -e "%JL_BUILD_SCRIPT%"
 
 test_script:
   - echo "%JL_TEST_SCRIPT%"
