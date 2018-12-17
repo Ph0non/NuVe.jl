@@ -19,8 +19,8 @@ branches:
      - CI
 
 after_success:
-    - julia --project=coverage/ -e 'using Pkg, Pkg.instantiate()'
-    - julia --project=coverage/ coverage/coverage.jl
+    - julia --project=coverage/ -e 'using Pkg; Pkg.instantiate(); coverage.jl'
+    # - julia --project=coverage/ coverage/coverage.jl
 
 jobs:
     include:
@@ -28,6 +28,6 @@ jobs:
       julia: 1.0
       os: linux
       script:
-          - julia --project=docs -e 'using Pkg; Pkg.instantiate(); Pkg.add(PackageSpec(path=pwd()))'
-          - julia --project=docs --color=yes docs/make.jl
+          - julia --project=docs --color=yes -e 'using Pkg; Pkg.instantiate(); Pkg.add(PackageSpec(path=pwd())); docs/make.jl'
+          # - julia --project=docs --color=yes docs/make.jl
       after_success: skip
