@@ -16,7 +16,7 @@ notification:
 
 branches:
     only:
-     - CI
+     - master
 
 after_success:
     - julia --project=coverage/ -e 'using Pkg; Pkg.instantiate(); include(joinpath("coverage", "coverage.jl"))'
