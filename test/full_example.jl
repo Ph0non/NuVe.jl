@@ -6,8 +6,8 @@ setting = Settings(:A10, [2019, 2026], [:fma, :is], :mean, 1, RefDate("1 Jan", "
 q0 = decayCorrection(setting, getSampleFromSource(setting.nv), getInterval(setting))
 
 @test q0["2019"][5,3] |> ismissing == true
-@test q0["2021"][1,4] == 3.868912616974668
-@test q0["2024"][13,12] == 3.8851361070608976
+@test isapprox(q0["2021"][1,4], 3.868912616974668)
+@test isapprox(q0["2024"][13,12], 3.8851361070608976)
 
 # Transform DataFrame to NamedArray
 q1 = Dict()
@@ -15,8 +15,8 @@ for (key, value) in q0
     push!(q1, key => df2namedarray(value, "samples", "nuclides"))
 end
 
-@test q1["2021"][1,"Nb94"] == 0.09798535533562212
-@test q1["2024"][13,"Am241"] == 0.21735287601251008
+@test isapprox(q1["2021"][1,"Nb94"], 0.09798535533562212)
+@test isapprox(q1["2024"][13,"Am241"], 0.21735287601251008)
 
 # determine percents
 q2 = Dict()
@@ -24,8 +24,8 @@ for (key, value) in q0
     push!(q2, key => df2namedarray(value, "samples", "nuclides") |> nuclideParts)
 end
 
-@test q2["2020"][5,"Cs137"] == 0.15620117797991342
-@test q2["2020"][10,"Pu241"] == 0.008343576209308942
+@test isapprox(q2["2020"][5,"Cs137"], 0.15620117797991342)
+@test isapprox(q2["2020"][10,"Pu241"], 0.008343576209308942)
 
 # calc some factors
 q3_a = Dict()
@@ -36,10 +36,10 @@ for (key, value) in q2
     push!(q3_∑, key => q3∑)
 end
 
-@test q3_a["2024"][1,"1b"] == 0.020052127083862895
-@test q3_a["2025"][1,"1a*"] == 0.6383234421244084
-@test q3_∑["2022"][3,"fma"] == 0.13542013493837893
-@test q3_∑["2022"][5,"is"] == 0.22208799526459147
+@test isapprox(q3_a["2024"][1,"1b"], 0.020052127083862895)
+@test isapprox(q3_a["2025"][1,"1a*"], 0.6383234421244084)
+@test isapprox(q3_∑["2022"][3,"fma"], 0.13542013493837893)
+@test isapprox(q3_∑["2022"][5,"is"], 0.22208799526459147)
 
 # define some constraints
 con1 = [Constraint(:Co60, :>, 5, 1)
