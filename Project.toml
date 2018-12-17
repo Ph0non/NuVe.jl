@@ -25,8 +25,6 @@ Documenter = "e30172f5-a6a5-5a46-863b-614d45cd2de4"
 
 [targets]
 test = ["Test", "JuMP", "Cbc", "SQLite", "NamedArrays", "DataFrames", "Dates", "Statistics"]
-docs = ["Documenter", "JuMP", "Cbc", "SQLite", "NamedArrays", "DataFrames", "Dates", "Statistics"]
-
 
 [compat]
 Documenter = "~0.20"
