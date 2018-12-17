@@ -18,7 +18,6 @@ function readDb(tab::String, arg::Array{String,1})
 	SQLite.Query(nvdb(), "select " * array2string(arg) * " from " * tab) |> DataFrame
 end
 
-# if isfile(db)
 "Datenbank mit allen Nuklidvektoren, Proben, Halbwertszeiten und Freigabewerten"
 function nvdb()
 	SQLite.DB(db)
@@ -38,10 +37,6 @@ const ɛ = df2namedarray(readDb("efficiency"), "method", "nuclide")
 
 "Das Inverse der Freigabewerte"
 const f = NamedArray( 1 ./ clearance_val, clearance_val.dicts, clearance_val.dimnames)
-const fᵀ = f'
-const ɛᵀ = ɛ'
-# end
-
 
 """
     getNuclideTypes(s::String)
