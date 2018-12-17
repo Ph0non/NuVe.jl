@@ -13,3 +13,4 @@ using NuVe
 # include("../src/model.jl")
 
 include("./test_utilities.jl")
+include("./full_example.jl")

@@ -1,6 +1,7 @@
 # push!(LOAD_PATH, "../src/")
 
 using Documenter
+import Pkg; Pkg.add("JuMP")
 using JuMP
 using NuVe
 
