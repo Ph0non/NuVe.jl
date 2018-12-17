@@ -34,9 +34,11 @@ const clearance_val = df2namedarray(readDb("clearance_val"), "path", "nuclide")
 
 "Die Messeffizienzen für die verschiedenen Messverfahren und Nuklide"
 const ɛ = df2namedarray(readDb("efficiency"), "method", "nuclide")
+const ɛᵀ = ɛ'
 
 "Das Inverse der Freigabewerte"
 const f = NamedArray( 1 ./ clearance_val, clearance_val.dicts, clearance_val.dimnames)
+const fᵀ = f'
 
 """
     getNuclideTypes(s::String)
