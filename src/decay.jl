@@ -69,7 +69,7 @@ function decayCorrection(s::Settings, sample::DataFrame, year::Array{Int64, 1})
 	for (index, i) in enumerate(year)
 		push!(sample_decay, string(i) => DataFrame([sample.s_id sample_array .* 2 .^ (-diff_days[:,index] ./ hl_array)], deleteat!(names(sample), 2) ))
 
-		"Zerfallskorrektur für Am-241 aus Nachbildung durch Pu-241"
+		# Zerfallskorrektur für Am-241 aus Nachbildung durch Pu-241
 		sample_decay[string(i)].Am241 = coalesce.(sample_decay[string(i)].Am241, 0)
 		sample_decay[string(i)].Am241 .+= coalesce.(sample.Pu241, 0) .* hl.Pu241[1] / (hl.Pu241[1] - hl.Am241[1]) .* (2 .^ (-diff_days[:,index] / hl.Pu241[1]) - 2 .^ (-diff_days[:,index] / hl.Am241[1]) )
 	end
