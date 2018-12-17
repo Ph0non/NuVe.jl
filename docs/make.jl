@@ -1,8 +1,8 @@
 # push!(LOAD_PATH, "../src/")
 
 using Documenter
-import Pkg; Pkg.add("JuMP#master")
-using JuMP
+# import Pkg; Pkg.add("JuMP#master")
+# using JuMP
 using NuVe
 
 makedocs(
