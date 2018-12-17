@@ -1,0 +1,10 @@
+name = "NuVe"
+uuid = "3d0bd5e0-febd-11e8-21f2-21f77405a8f8"
+authors = ["Martin <mklemann@mailbox.org>"]
+version = "0.1.0"
+
+[deps]
+Cbc = "9961bab8-2fa3-5c5a-9d89-47fab24efd76"
+JuMP = "4076af6c-e467-56ae-b986-b466b2749572"
+NamedArrays = "86f7a689-2022-50b4-a561-43c23ac3c673"
+SQLite = "0aa819cd-b072-5ff4-a722-6bc24af294d9"
