@@ -13,7 +13,7 @@ end
 Fragt zu einem gegebenen Nuklidvektor weitere Informationen ab (z. B. "date" oder "source" (Herkunftsort))
 """
 function getSampleInfo(x::String, nv::Symbol)
-	SQLite.query(nvdb, "select " * x * " from nv_source join nv_summary on nv_source.nv_id = nv_summary.nv_id where NV = '" * (nv |> String) *"'")
+	SQLite.query(nvdb(), "select " * x * " from nv_source join nv_summary on nv_source.nv_id = nv_summary.nv_id where NV = '" * (nv |> String) *"'")
 end
 
 """

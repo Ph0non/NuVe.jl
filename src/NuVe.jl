@@ -12,9 +12,9 @@ include("decay.jl")
 include("model.jl")
 
 # export Types
-export Settings, Constraint
+export Settings, Constraint, RefDate
 
 # export functions
-export decayCorrection, df2namedarray, nuclideParts, CalcFactors, addUserConstraints, setBound
+export decayCorrection, df2namedarray, nuclideParts, CalcFactors, addUserConstraints, setBound, getSampleFromSource, getInterval, setObjectives
 
 end

@@ -1,16 +1,13 @@
-push!(LOAD_PATH, "../src/")
-
 using Documenter
 using NuVe
 
 makedocs(
     sitename = "NuVe",
-    format = Documenter.Markdown(),
+    format = Documenter.HTML(),
     modules = [NuVe]
 )
 
-
 deploydocs(
-    repo = "github.com/Ph0non/NuVe.jl.git"
+    repo = "github.com/Ph0non/NuVe.jl.git",
     target = "build"
 )

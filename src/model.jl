@@ -20,20 +20,20 @@ end
 
 Legt das Optimierungsziel des Modells aufgrund der Einstellungen ([`Settings`](@ref)) fest.
 """
-function setObjectives(m::Model, x::Array{VariableRef,1}, parts::NamedArrays.NamedArray, c::Array{Constraint,1})
-	if setting.target == :fma
+function setObjectives(s::Settings, m::Model, x::Array{VariableRef,1}, parts::NamedArrays.NamedArray, c::Array{Constraint,1})
+	if s.target == :fma
 		@objective(m, Max, sum( ε["fma", getNuclidesFromConstraint(c)] .* x))
-	elseif setting.target == :mc
+	elseif s.target == :mc
 		@objective(m, Max, sum( ε["mc", getNuclidesFromConstraint(c)] .* x ))
-	elseif setting.target == :como
+	elseif s.target == :como
 		@objective(m, Max, sum( ε["como", getNuclidesFromConstraint(c)] .* x ))
-	elseif setting.target == :lb124
+	elseif s.target == :lb124
 		@objective(m, Max, sum( ε["lb124", getNuclidesFromConstraint(c)] .* x ))
-	elseif setting.target == :is
+	elseif s.target == :is
 		@objective(m, Max, sum( ε["is", getNuclidesFromConstraint(c)] .* x ))
 	# elseif setting.target in keys(readDb("clearance_val").path)
 		# @objective(m, :Max, sum(x .* f_red[setting.target, :]) );
-	elseif setting.target == :mean
+	elseif s.target == :mean
 		# if isZ01
 			# np_red = mean(np, 1)[:, rel_nuclides]
 		# else
@@ -48,8 +48,8 @@ function setObjectives(m::Model, x::Array{VariableRef,1}, parts::NamedArrays.Nam
 	end
 end
 
-function setBound(m::Model, x::Array{VariableRef,1}, c::Array{Constraint,1}, ∑xᵢdivfᵢ::NamedArrays.NamedArray, ∑εᵢxᵢ::NamedArrays.NamedArray)
-	∑εᵢyᵢ = ε[setting.gauge .|> String, getNuclidesFromConstraint(c)] * x
+function setBound(s::Settings, m::Model, x::Array{VariableRef,1}, c::Array{Constraint,1}, ∑xᵢdivfᵢ::NamedArrays.NamedArray, ∑εᵢxᵢ::NamedArrays.NamedArray)
+	∑εᵢyᵢ = ε[s.gauge .|> String, getNuclidesFromConstraint(c)] * x
 
-	@constraint(m, [j in names(∑xᵢdivfᵢ, 1), l in keys(setting.paths), k in setting.paths[l]], ∑εᵢyᵢ[String(l)] * ∑xᵢdivfᵢ[j, k] ≤ setting.treshold * ∑εᵢxᵢ[j, String(l)] * [f[setting.paths[l], getNuclidesFromConstraint(c)] * x][1][k])
+	@constraint(m, [j in names(∑xᵢdivfᵢ, 1), l in keys(s.paths), k in s.paths[l]], ∑εᵢyᵢ[String(l)] * ∑xᵢdivfᵢ[j, k] ≤ s.treshold * ∑εᵢxᵢ[j, String(l)] * [f[s.paths[l], getNuclidesFromConstraint(c)] * x][1][k])
 end
