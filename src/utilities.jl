@@ -31,7 +31,7 @@ end
 Transponiert einen Vektor (`n × 1`) zu (`1 × n`).
 """
 function travec(x::Array)
-	reshape(x, 1, length(x))
+	Base.reshape(x, 1, length(x))
 end
 
 """
