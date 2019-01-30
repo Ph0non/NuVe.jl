@@ -147,7 +147,7 @@ git-tree-sha1 = "0ec19bea3ea2d053679a831336a96231352c9ae1"
 repo-rev = "master"
 repo-url = "https://github.com/JuliaOpt/JuMP.jl.git"
 uuid = "4076af6c-e467-56ae-b986-b466b2749572"
-version = "0.18.5+"
+version = "0.19.-beta2"
 
 [[LegacyStrings]]
 deps = ["Compat"]
