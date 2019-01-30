@@ -61,7 +61,7 @@ for i in getInterval(setting) .|> string
 
     NuVe.JuMP.optimize!(m)
 
-    if NuVe.JuMP.termination_status(m) == NuVe.MOI.Success && NuVe.JuMP.primal_status(m) == NuVe.MOI.FeasiblePoint
+    if NuVe.JuMP.termination_status(m) == NuVe.JuMP.MOI.OPTIMAL
         push!(q4, i => [round.(Int, NuVe.JuMP.value(x[j]))./100 for j=1:length(con1)])
     else
         push!(q4, i => NuVe.JuMP.termination_status(m))
