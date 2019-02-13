@@ -53,3 +53,30 @@ function setBound(s::Settings, m::Model, x::Array{VariableRef,1}, c::Array{Const
 
 	@constraint(m, [j in names(∑xᵢdivfᵢ, 1), l in keys(s.paths), k in s.paths[l]], ∑εᵢyᵢ[String(l)] * ∑xᵢdivfᵢ[j, k] ≤ s.treshold * ∑εᵢxᵢ[j, String(l)] * [f[s.paths[l], getNuclidesFromConstraint(c)] * x][1][k])
 end
+
+
+function test_nv(s::Settings, nv::Array{Float64,1})
+	t0 = decayCorrection(s, getSampleFromSource(s.nv), getInterval(s))
+
+	t1 = Dict()
+	for (key, value) in t0
+	    push!(t1, key => df2namedarray(value, "samples", "nuclides"))
+	end
+
+	"Anteile"
+	t2 = Dict()
+	for (key, value) in t0
+	    push!(t2, key => df2namedarray(value, "samples", "nuclides") |> nuclideParts)
+	end
+
+	"Faktoren"
+	t3_a = Dict()
+	t3_∑ = Dict()
+	for (key, value) in t2
+	    (t3a, t3∑) = value |> CalcFactors
+	    push!(t3_a, key => t3a)
+	    push!(t3_∑, key => t3∑)
+	end
+
+	
+end
