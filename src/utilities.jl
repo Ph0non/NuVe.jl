@@ -13,7 +13,7 @@ end
 Fragt zu einem gegebenen Nuklidvektor weitere Informationen ab (z. B. "date" oder "source" (Herkunftsort))
 """
 function getSampleInfo(x::String, nv::Symbol)
-	SQLite.query(nvdb(), "select " * x * " from nv_source join nv_summary on nv_source.nv_id = nv_summary.nv_id where NV = '" * (nv |> String) *"'")
+	DBInterface.execute(nvdb(), "select " * x * " from nv_source join nv_summary on nv_source.nv_id = nv_summary.nv_id where NV = '" * (nv |> String) *"'")
 end
 
 """
@@ -41,7 +41,7 @@ Ersetzt in einem DataFrame alle `missing` durch 0.
 """
 function removeMissing(x::DataFrame)
 	for i in names(x)
-		x[i] = coalesce.(x[i], 0)
+		x[!, i] = coalesce.(x[i], 0)
 	end
 	return x
 end
@@ -54,7 +54,7 @@ Potentiell fehlende Werte werden durch 0 ersetzt.
 """
 function df2namedarray(x::DataFrame, rowname::String, columnname::String)
 	NamedArray(convert(Array{Float64, 2}, removeMissing(x)[names(x)[2:end]]),
-		( String.(x[1]), String.(names(x))[2:end] ),
+		( string.(x[:, 1]), string.(names(x))[2:end] ),
 		(rowname, columnname) )
 end
 

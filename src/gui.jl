@@ -13,7 +13,8 @@ using Dates
 "Dropdown-Widget für die Auswahl des NV"
 function gui_get_nv_picker()
     gui_nv_picker_ = Dict()
-    for i in NuVe.readDb("nv_summary", ["NV"])[:,1]
+    # for i in NuVe.readDb("nv_summary", ["NV"])[:,1]
+    for i in readDb("nv_summary", ["NV"])[:,1]
         push!(gui_nv_picker_, i => i)
     end
     dropdown(gui_nv_picker_ |> sort, label="Nuklidvektor")
