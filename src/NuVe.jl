@@ -1,14 +1,21 @@
-module NuVe
+#module NuVe
+@everywhere using JuMP, Cbc
+@everywhere using SQLite, NamedArrays, Dates
+@everywhere import Statistics.mean, DataFrames.describe
+@everywhere using DataFrames, Distributions, XLSX
 
-using JuMP, Cbc
-using SQLite, NamedArrays
-import Statistics.mean, DataFrames.describe
+prefix = ""
+if splitpath(pwd())[end] != "src"
+    @everywhere global prefix = "src"
+end
 
-include("types.jl")
-include("utilities.jl")
-include("database.jl")
-include("decay.jl")
-include("model.jl")
+include(joinpath(prefix, "types.jl"))
+include(joinpath(prefix, "utilities.jl"))
+include(joinpath(prefix, "database.jl"))
+include(joinpath(prefix, "decay.jl"))
+include(joinpath(prefix, "dists.jl"))
+include(joinpath(prefix, "samples.jl"))
+include(joinpath(prefix, "model.jl"))
 
 # export Types
 export Settings, Constraint, RefDate
@@ -16,4 +23,4 @@ export Settings, Constraint, RefDate
 # export functions
 export decayCorrection, df2namedarray, nuclideParts, CalcFactors, addUserConstraints, setBound, getSampleFromSource, getInterval, setObjectives
 
-end
+#end
