@@ -23,6 +23,7 @@ struct Settings
   treshold::Real
   refDate::RefDate
   paths::Dict
+  tenuSv::Bool
 end
 
 """
