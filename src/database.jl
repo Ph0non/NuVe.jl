@@ -1,6 +1,6 @@
 "Pfad zur Datenbank"
 #const db = joinpath(dirname(dirname(Base.functionloc(NuVe.eval, Tuple{Nothing})[1])), "src", "nvdb-v3.sqlite")
-const db = joinpath(prefix, "nvdb-v3.sqlite")
+const db = joinpath("src", "nvdb-v3.sqlite")
 """
     readDb(s::String)
 Gibt die angegebene Tabelle vollständig als DataFrame zurück.
@@ -64,7 +64,7 @@ end
 
 
 "Daten von Excel-Blatt einlesen"
-const xf = XLSX.readxlsx(joinpath(prefix, "Parameter.xlsx"))
+const xf = XLSX.readxlsx(joinpath("src", "Parameter.xlsx"))
 const int_sheet = xf["intern"]
 const fgw_ = NamedArray(int_sheet["B2:U3"], (int_sheet["A2:A3"] |> vec, int_sheet["B1:U1"] |> vec))
 const fraktionierung = NamedArray(int_sheet["B6:U8"], (int_sheet["A6:A8"] |> vec, int_sheet["B1:U1"] |> vec))

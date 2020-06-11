@@ -1,12 +1,12 @@
 #module NuVe
-@everywhere using JuMP, Cbc
-@everywhere using SQLite, NamedArrays, Dates
-@everywhere import Statistics.mean, DataFrames.describe
-@everywhere using DataFrames, Distributions, XLSX
+using JuMP, Cbc
+using SQLite, NamedArrays, Dates
+import Statistics.mean, DataFrames.describe
+using DataFrames, Distributions, XLSX
 
 prefix = ""
 if splitpath(pwd())[end] != "src"
-    @everywhere global prefix = "src"
+    # global prefix = "src"
 end
 
 include(joinpath(prefix, "types.jl"))
@@ -15,6 +15,7 @@ include(joinpath(prefix, "database.jl"))
 include(joinpath(prefix, "decay.jl"))
 include(joinpath(prefix, "dists.jl"))
 include(joinpath(prefix, "samples.jl"))
+include(joinpath(prefix, "funsDose.jl"))
 include(joinpath(prefix, "model.jl"))
 
 # export Types
