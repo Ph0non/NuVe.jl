@@ -1,5 +1,4 @@
 # statistic parameter
-perz = 0.95;
 sample_size = 150_000;
 
 # Distributions
