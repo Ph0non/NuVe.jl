@@ -1,72 +1,103 @@
-using NuVe
-using Interact
-using Blink
-using WebIO
-using Dates
+using Gtk
+# global b = GtkBuilder(filename = joinpath(pwd(), prefix, "nuve.glade"))
 
-# ui = button()
-# display(ui)
-#
-# w = Window()
-# body!(w, q2)
+# include(joinpath(prefix, "signals.jl"))
+# include(joinpath(prefix, "callbacks.jl"))
 
-"Dropdown-Widget für die Auswahl des NV"
-function gui_get_nv_picker()
-    gui_nv_picker_ = Dict()
-    # for i in NuVe.readDb("nv_summary", ["NV"])[:,1]
-    for i in readDb("nv_summary", ["NV"])[:,1]
-        push!(gui_nv_picker_, i => i)
+xf_ana = XLSX.readxlsx(joinpath("src", "Vollanalysen.xlsx"))
+
+function populate_ls_nv()
+    empty!(b["ls_nv"])
+    for i=1:length(XLSX.gettable(xf_ana["Übersicht NV"])[1][1])
+        push!(b["ls_nv"], tuple(sort!(XLSX.gettable(xf_ana["Übersicht NV"])[1][1])[i]))
     end
-    dropdown(gui_nv_picker_ |> sort, label="Nuklidvektor")
 end
-gui_nv_picker = gui_get_nv_picker()
 
-"Dropdown-Widget für die Auswahl des Optimierungsziels"
-dict_optim = OrderedDict("Probenmittelwert" => :mean, "FMA" => :fma, "CoMo" => :como, "MC" => :mc, "Lb124" => :lb124, "In-situ" => :is)
-gui_optim_picker = dropdown(dict_optim, label="Optimierungsziel")
+id_proc = SortedDict("mean" => "Mittelwert", "fma" => "FMA", "is" => "in-situ", "mc" => "MicroCont II", "lb124" => "Lb 124", "como" => "CoMo 170")
+function populate_ls_opt()
+    empty!(b["ls_opt"])
+    for i in keys(id_proc)
+        push!(b["ls_opt"], tuple(id_proc[i]))
+    end
+end
 
-"Widget für das Jahresintervall"
-gui_date = rangeslider([2010:2030;], value=[2015,2025])
+function desense_con_widget(wid::String, nu::String)
+    b[wid * "_" * nu].:sensitive[Bool] = false
+    nothing
+end
 
-"Widget für den Referenztag"
-gui_ref_day = dropdown([1:Dates.daysinmonth(Date(2018,12,1));], label="Tag")
-"Widget für den Referenzmonat"
-gui_ref_month = dropdown([1:12;], label="Monat")
+function init_desense_con()
+    for j in ["cobo", "lmt", "w"]
+        for i in lowercase.(nu_names)
+            desense_con_widget(j, i)
+        end
+    end
+end
 
-# gui_device_list = dropdown(OrderedDict("FMA" => :fma, "CoMo" => :como, "MC" => :mc, "Lb124" => :lb124, "In-situ" => :is), multiple=false, label="Berücksichtigte Messgeräte")
-gui_cb_fma = checkbox(label="FMA", value=true)
-gui_cb_como = checkbox(label="CoMo")
-gui_cb_mc = checkbox(label="MC")
-gui_cb_lb124 = checkbox(label="Lb124")
-gui_cb_is = checkbox(label="In-situ")
+function init_sp_year()
+    b["sp_year_min"].:text[String] = year(now()) |> string
+    b["sp_year_max"].:text[String] = year(now())+5 |> string
+    nothing
+end
 
-w = Blink.Window()
-# body!(w, dom"div"(gui_nv_picker, dom"div"("Hello World")))
+function init_opt()
+    b["cobo_opt"].:active[Int] = 5
+    nothing
+end
 
-q = node(:div, className="tile is-ancestor box",
-        node(:div, className="tile is-parent is-3",
-            node(:div, className="tile is-vertical",
-                node(:div, className="tile is-parent",
-                    node(:div, className="tile is-child box",
-                        node(:div, className="columns is-centered", gui_nv_picker)
-                        ),
-                    node(:div, className="tile is-parent box",
-                        node(:div, className="tile is-child",
-                            node(:div, className="columns is-centered", gui_ref_day, gui_ref_month),
-                            )
-                        ),
-                    node(:div, className="tile is-child box", gui_date)
-                    ),
-                    node(:div, className="tile is-parent",
-                        # node(:div, className="tile box", gui_device_list),
-                        node(:div, className="tile is-vertical box", "Berücksichtigte Messgeräte",
-                            node(:div, className="tile", gui_cb_fma, gui_cb_como, gui_cb_lb124, gui_cb_mc, gui_cb_is)
-                        ),
-                        node(:div, className="tile box", gui_optim_picker)
-                    )
-                )
-            )
-        )
+function init_clearpath()
+    q = Dict("fma"  => ["OF", "1a", "2a", "4a", "1b", "2b", "3b", "4b", "5b", "6b", "1a*"],
+             "como" => ["OF", "1a",       "4a",                   "4b", "5b", "6b"       ],
+             "mc"   => ["OF", "1a",       "4a",                   "4b", "5b", "6b"       ],
+             "lb124"=> ["OF", "1a",       "4a",                   "4b", "5b", "6b"       ],
+             "is"   => ["OF",             "4a",                   "4b", "5b", "6b"       ])
 
-# q |> display
-body!(w, q)
+    for i in keys(q)
+        for j in q[i]
+            b["cbtn_" * i * "_" * j].:active[Bool] = true
+        end
+    end
+    b["cbtn_fma"].:active[Bool] = true
+    nothing
+end
+
+c = Constraint[]
+function create_con(nu_str::String)
+    nu_sym = nu_names[ lowercase.(nu_names) .== nu_str ][1] |> Symbol
+    # Constraint schon vorhanden? Falls ja, dann löschen und neu erstellen
+    delete_con(nu_sym)
+    
+    con_sym = [:(=), :<, :>][b["cobo_" * nu_str].:active[Int] + 1]
+    lmt = parse_num_con( b["lmt_" * nu_str].:text[String]) == nothing ? 100.0 : parse_num_con( b["lmt_" * nu_str].:text[String])
+    w = parse_num_con( b["w_" * nu_str].:text[String]) == nothing ? 1.0 : parse_num_con( b["w_" * nu_str].:text[String])
+
+    push!(c, Constraint(nu_sym, con_sym, lmt, w))
+end
+
+function parse_num_con(s::String)
+    s = replace(s, "," => ".")
+    s = replace(s, "%" => "")
+    s = replace(s, " " => "")
+    tryparse(Float64, s)
+end
+
+function delete_con(nu_sym::Symbol)
+    nu_ind = findfirst(nu_sym .== [c[i].nuclide for i=1:length(c)])
+    if nu_ind != nothing
+        deleteat!(c, nu_ind)
+    end
+end
+
+function run_app()
+    global b = GtkBuilder(filename = joinpath(pwd(), prefix, "nuve.glade"))
+    include(joinpath(prefix, "signals.jl"))
+    include(joinpath(prefix, "callbacks.jl"))
+    populate_ls_nv()
+    populate_ls_opt()
+    init_desense_con()
+    win = b["main"]
+    Gtk.showall(win)
+    init_sp_year()
+    init_opt()
+    init_clearpath()
+end

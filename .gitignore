@@ -3,6 +3,10 @@ docs/build/
 docs/site/
 .vscode
 *.workspace
+*.code.workspace
+
+~$*.xlsx
+*.glade~
 
 *.jl.cov
 *.jl.*.cov

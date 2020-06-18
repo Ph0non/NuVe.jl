@@ -53,9 +53,10 @@ end
 function setBound(s::Settings, m::Model, x::Array{VariableRef,1}, c::Array{Constraint,1}, ∑xᵢdivfᵢ::NamedArrays.NamedArray, ∑εᵢxᵢ::NamedArrays.NamedArray)
 	∑εᵢyᵢ = ε[s.gauge .|> String, getNuclidesFromConstraint(c)] * x
 
-	@constraint(m, [j in names(∑xᵢdivfᵢ, 1), l in keys(s.paths), k in s.paths[l]], ∑εᵢyᵢ[String(l)] * ∑xᵢdivfᵢ[j, k] ≤ s.treshold * ∑εᵢxᵢ[j, String(l)] * [f[s.paths[l], getNuclidesFromConstraint(c)] * x][1][k])
+	@constraint(m, [j in names(∑xᵢdivfᵢ, 1), l in keys(s.paths), k in s.paths[l]], s.treshold * ∑εᵢyᵢ[String(l)] * ∑xᵢdivfᵢ[j, k] ≤ ∑εᵢxᵢ[j, String(l)] * [f[s.paths[l], getNuclidesFromConstraint(c)] * x][1][k])
 end
 
+# ∑εᵢyᵢ[1,1] *  ∑xᵢdivfᵢ[1, "1a"] <= ∑εᵢxᵢ[1, "fma"] *  [f[s.paths[:fma], getNuclidesFromConstraint(con1)] * x][1][1]
 
 function test_nv(s::Settings, nv::Array{Float64,1})
 	t0 = decayCorrection(s, getSampleFromSource(s.nv), getInterval(s))
@@ -88,7 +89,7 @@ end
 
 Erstellt abhängig vom Flag `tenuSv` das passende Modell. Wenn `tenuSv == true` wird versucht das 10-µSv-Konzept für Metalle zur Rezyklierung ohne Berücksichtigung der Oberfläche  einzuhalten. 
 """
-function defineModel(s::Settings, con:: Array{Constraint,1}, q2::T, q3a::T, q3∑::T, q3a_end::T, q3∑_end::T) where {T<:NamedArray{Float64,2}}
+function defineModel(s::Settings, con::Array{Constraint,1}, q2::T, q3a::T, q3∑::T, q3a_end::T, q3∑_end::T) where {T<:NamedArray{Float64,2}}
 	m = JuMP.Model(Cbc.Optimizer)
 	JuMP.set_silent(m)
 

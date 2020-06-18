@@ -51,7 +51,7 @@ Macht aus den Einstellungen ([`Settings`](@ref)) für Anfangs- und Endjahr ein A
 zusätzlich jedes Jahr dazwischen enthält.
 """
 function getInterval(s::Settings)
-	[s.year[1]:s.year[2];]
+	[s.year[1]:s.year[2]+1;]
 end
 
 """

@@ -1,6 +1,7 @@
 "Pfad zur Datenbank"
 #const db = joinpath(dirname(dirname(Base.functionloc(NuVe.eval, Tuple{Nothing})[1])), "src", "nvdb-v3.sqlite")
 const db = joinpath("src", "nvdb-v3.sqlite")
+xf_param = XLSX.readxlsx(joinpath("src", "Parameter.xlsx"))
 """
     readDb(s::String)
 Gibt die angegebene Tabelle vollständig als DataFrame zurück.
@@ -23,14 +24,19 @@ function nvdb()
 	SQLite.DB(db)
 end
 
-"Die Namen aller verwendeten Nuklide"
-const nu_names = SQLite.columns(nvdb(), "clearance_val").name[2:end] .|> String
-
 "Die Halbwertszeiten aller Nuklide"
-const hl = DBInterface.execute(nvdb(), "select " * array2string(nu_names) * " from halflife") |> DataFrame
+# const hl = DBInterface.execute(nvdb(), "select " * array2string(nu_names) * " from halflife") |> DataFrame
 
 "Die Freigabewerte aller Nuklide"
-const clearance_val = df2namedarray(readDb("clearance_val"), "path", "nuclide")
+# const clearance_val = df2namedarray(readDb("clearance_val"), "path", "nuclide")
+function fun_clearance_val()
+	sheet_fgw = xf_param["Freigabewerte"]
+	NamedArray(convert(Matrix{Float64}, sheet_fgw["B2:N33"]'), convert(Tuple{Vector{String}, Vector{String}}, (sheet_fgw["B1:N1"] |>vec , sheet_fgw["A2:A33"] |> vec)))
+end
+const clearance_val = fun_clearance_val()
+
+"Die Namen aller verwendeten Nuklide"
+const nu_names = clearance_val.dicts[2] |> keys .|> String
 
 "Die Messeffizienzen für die verschiedenen Messverfahren und Nuklide"
 const ɛ = df2namedarray(readDb("efficiency"), "method", "nuclide")
@@ -55,17 +61,17 @@ end
 Ruft alle vorhanden Proben zu einem Nuklidvektor ab.
 """
 function getSampleFromSource(nv::Symbol)
-	q = DBInterface.execute(nvdb(), "select s_id, date, " * array2string(nu_names) *
-	" from nv_source join nv_summary on nv_source.nv_id = nv_summary.nv_id where NV = '" *
-	(nv |> string) * "'") |> DataFrame
-	q.date = map(x->Date(x, "dd.mm.yyyy"), q.date)
-	return q
+	q = XLSX.getdata(xf_ana["A01"]) |> permutedims
+	dt = [Int; Date; repeat([float], 32)]
+	q2 = DataFrame(q[2:end, :], Symbol.(q[1,:]))
+	for i=1:length(dt)
+		q2[!,i] = dt[i].(q2[!,i])
+	end
+	return q2
 end
 
-
-"Daten von Excel-Blatt einlesen"
-const xf = XLSX.readxlsx(joinpath("src", "Parameter.xlsx"))
-const int_sheet = xf["intern"]
+"Parameter von Excel-Blatt einlesen für 10µSv-Berechnung"
+const int_sheet = xf_param["Dosiskoeffizienten"]
 const fgw_ = NamedArray(int_sheet["B2:U3"], (int_sheet["A2:A3"] |> vec, int_sheet["B1:U1"] |> vec))
 const fraktionierung = NamedArray(int_sheet["B6:U8"], (int_sheet["A6:A8"] |> vec, int_sheet["B1:U1"] |> vec))
 const dosfac_geo =  NamedArray(int_sheet["B11:U14"], (int_sheet["A11:A14"] |> vec, int_sheet["B1:U1"] |> vec))
