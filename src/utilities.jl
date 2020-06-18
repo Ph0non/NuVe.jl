@@ -41,7 +41,7 @@ Ersetzt in einem DataFrame alle `missing` durch 0.
 """
 function removeMissing(x::DataFrame)
 	for i in names(x)
-		x[!, i] = coalesce.(x[i], 0)
+		x[!, i] = coalesce.(x[!, i], 0)
 	end
 	return x
 end
@@ -98,3 +98,11 @@ Diese Funktion wird beispielsweise benötigt, wenn auf die Repräsentativität d
 function getWeightsFromConstraint(x::Array{Constraint,1})
 	[x[i].weight for i=1:length(x) ]
 end
+
+# export SQLite to XLSX
+# for i in eachrow(DBInterface.execute(nvdb(), "select NV from nv_summary") |> DataFrame |> sort)
+#     XLSX.openxlsx(joinpath("src", "Vollanalysen.xlsx"), mode="rw") do xf
+#         XLSX.addsheet!(xf, i[1])
+#         XLSX.writetable!(xf[i[1]],  collect(DataFrames.eachcol(getSampleFromSource(Symbol(i[1])))), DataFrames.names(getSampleFromSource(Symbol(i[1]))))
+#     end
+# end

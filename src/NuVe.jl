@@ -1,12 +1,12 @@
 #module NuVe
 using JuMP, Cbc
-using SQLite, NamedArrays, Dates
+using SQLite, NamedArrays, Dates, DataStructures
 import Statistics.mean, DataFrames.describe
 using DataFrames, Distributions, XLSX
 
 prefix = ""
 if splitpath(pwd())[end] != "src"
-    # global prefix = "src"
+    global prefix = "src"
 end
 
 include(joinpath(prefix, "types.jl"))
