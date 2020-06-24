@@ -25,12 +25,29 @@ function cb_tb_calc(widget)
     end
     b["pbar"].:fraction[Float64] = 0
     createSettings()
-    (decayDict, partDict, q3_aDict, q3_∑Dict, nvDict) = init_Dicts()
     
+    if isempty(sDict)
+        (decayDict, partDict, q3_aDict, q3_∑Dict, nvDict) = init_Dicts()
+    else
+        decayDict = sDict[1]
+        partDict = sDict[2]
+        q3_aDict = sDict[3]
+        q3_∑Dict = sDict[4]
+        nvDict = init_nvDict()
+    end
     decayDict = calcDecayCorrection(decayDict)
     partDict = calcParts(partDict, decayDict)
     (q3_aDict, q3_∑Dict) = calcFactors(q3_aDict, q3_∑Dict, partDict, decayDict)
-    # println(decayDict["2022"])
+    
+    if isempty(sDict)
+        push!(sDict, decayDict, partDict, q3_aDict, q3_∑Dict)
+    else
+        sDict[1] = decayDict
+        sDict[2] = partDict
+        sDict[3] = q3_aDict
+        sDict[4] = q3_∑Dict
+    end
+
     y = collect(qs.year[1]:qs.year[2])
 
     # l = Threads.SpinLock()
@@ -48,8 +65,8 @@ function cb_tb_calc(widget)
             # jj[]
         # Threads.unlock(l)
     end
-
-    change_tv(nvDict)
+    q_10us = b["swt_10us_calc"].:active[Bool]
+    global qs = Settings(q_nv, q_year, q_gauge, q_target, q_treshold, q_refdate, q_paths, q_10us)
 end
 
 function cb_sp_year_min_changed(widget)

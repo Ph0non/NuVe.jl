@@ -3,6 +3,8 @@ using Gtk
 import Base.popfirst!
 popfirst!(x::GtkListStoreLeaf) = deleteat!(x, 1)
 qs = nothing
+old_qs = nothing
+sDict = Dict[]
 rTxt = GtkCellRendererText()
 
 c1 = GtkTreeViewColumn("Nuklid", rTxt, Dict([("text", 0)]) )
