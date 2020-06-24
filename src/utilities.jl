@@ -53,7 +53,7 @@ Diese Funktion wandelt einen `DataFrame` in ein `Array{Float64, 2}` um.
 Potentiell fehlende Werte werden durch 0 ersetzt.
 """
 function df2namedarray(x::DataFrame, rowname::String, columnname::String)
-	NamedArray(convert(Array{Float64, 2}, removeMissing(x)[names(x)[2:end]]),
+	NamedArray(convert(Array{Float64, 2}, removeMissing(x)[:, names(x)[2:end]]),
 		( string.(x[:, 1]), string.(names(x))[2:end] ),
 		(rowname, columnname) )
 end

@@ -1,5 +1,5 @@
 function cb_nv_changed(widget)
-    println(widget.:active_id[String])
+    init_Dicts()
 end
 
 function cb_cbtn_con_toggled(widget)
@@ -20,11 +20,8 @@ function cb_con_changed(widget)
 end
 
 function cb_tb_calc(widget)
-    q_nv = b["cobo_nv"].:active_id[String] |> Symbol
-    q_year = tryparse.(Int, [b["sp_year_min"].:text[String], b["sp_year_max"].:text[String] ])
-    q_gauge = Symbol[]
-    for i in ["fma", "como", "lb124", "mc", "is"]
-        b["cbtn_" * i].:active[Bool] ? push!(q_gauge, Symbol(i)) : nothing
+    if qs != nothing
+        global old_qs = qs
     end
     b["pbar"].:fraction[Float64] = 0
     createSettings()
@@ -78,8 +75,16 @@ function cb_sp_year_min_changed(widget)
     end
 end
 
+# jj = Threads.Atomic{Int}(0)
+
 function cb_sp_year_max_changed(widget)
     if tryparse(Int64, widget.:text[String]) < tryparse(Int64, b["sp_year_min"].:text[String])
         b["sp_year_min"].:text[String] = widget.:text[String]
+    end
+end
+
+function cb_cbtn_10us_calc(widget)
+    if widget.:active[Bool] == true
+        b["cbtn_10us_show"].:active[Bool] = true
     end
 end

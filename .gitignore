@@ -3,7 +3,7 @@ docs/build/
 docs/site/
 .vscode
 *.workspace
-*.code.workspace
+*.code-workspace
 
 ~$*.xlsx
 *.glade~

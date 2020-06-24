@@ -9,14 +9,14 @@ if splitpath(pwd())[end] != "src"
     global prefix = "src"
 end
 
-include(joinpath(prefix, "types.jl"))
-include(joinpath(prefix, "utilities.jl"))
-include(joinpath(prefix, "database.jl"))
-include(joinpath(prefix, "decay.jl"))
-include(joinpath(prefix, "dists.jl"))
-include(joinpath(prefix, "samples.jl"))
-include(joinpath(prefix, "funsDose.jl"))
-include(joinpath(prefix, "model.jl"))
+include(joinpath("types.jl"))
+include(joinpath("utilities.jl"))
+include(joinpath("database.jl"))
+include(joinpath("decay.jl"))
+include(joinpath("dists.jl"))
+include(joinpath("samples.jl"))
+include(joinpath("funsDose.jl"))
+include(joinpath("model.jl"))
 
 # export Types
 export Settings, Constraint, RefDate
