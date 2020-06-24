@@ -27,13 +27,14 @@ function cb_tb_calc(widget)
     createSettings()
     
     if isempty(sDict)
-        (decayDict, partDict, q3_aDict, q3_∑Dict, nvDict) = init_Dicts()
+        (decayDict, partDict, q3_aDict, q3_∑Dict, nvDict, DlDict) = init_Dicts()
     else
         decayDict = sDict[1]
         partDict = sDict[2]
         q3_aDict = sDict[3]
         q3_∑Dict = sDict[4]
         nvDict = init_nvDict()
+        DlDict = init_DlDict()
     end
     decayDict = calcDecayCorrection(decayDict)
     partDict = calcParts(partDict, decayDict)
@@ -54,19 +55,26 @@ function cb_tb_calc(widget)
     # Threads.@threads 
     for i in y  
         (e, nv_x) = solveAll(i, partDict[string(i)], q3_aDict[string(i)], q3_∑Dict[string(i)], q3_aDict[string(i+1)], q3_∑Dict[string(i+1)])
-
-        if e === nothing
+        if e === nothing # Problem war lösbar
             push!(nvDict, string(i) => nv_x)
-        else
+            if b["cbtn_10us_show"].active[Bool]
+                Max_Dosis = checkDose()
+                dos = quantile( fit(LogNormal, Max_Dosis.array), 0.95)
+                push!(DlDict, string(i) => round(dos, digits=2))
+            end
+        else # Problem konnte nicht gelöst werden
             push!(nvDict, string(i) => e)
+            if b["cbtn_10us_show"].active[Bool]
+                push!(DlDict, string(i) => e)
+            end
         end
         # Threads.lock(l)
             b["pbar"].:fraction[Float64] = length(nvDict)/length(y)
             # jj[]
         # Threads.unlock(l)
     end
-    q_10us = b["swt_10us_calc"].:active[Bool]
-    global qs = Settings(q_nv, q_year, q_gauge, q_target, q_treshold, q_refdate, q_paths, q_10us)
+    
+    change_tv(nvDict, DlDict)
 end
 
 function cb_sp_year_min_changed(widget)
