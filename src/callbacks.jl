@@ -26,12 +26,47 @@ function cb_tb_calc(widget)
     for i in ["fma", "como", "lb124", "mc", "is"]
         b["cbtn_" * i].:active[Bool] ? push!(q_gauge, Symbol(i)) : nothing
     end
-    q_target = Symbol(collect(keys(id_proc))[b["cobo_opt"].:active[Int]+1])
-    q_treshold = parse_num_con(b["ent_th"].:text[String]) == nothing ? 1.0 : parse_num_con(b["ent_th"].:text[String])
-    q_refdate = RefDate("1 Jan", "d u")
-    q_paths = Dict{Symbol,Array{String,1}}()
-    for i in q_gauge
-        push!(q_paths, i => [j for j in collect(keys(f.dicts[1]))[1:end-1] if b["cbtn_" * String(i) * "_" * j].:active[Bool] ] )
+    b["pbar"].:fraction[Float64] = 0
+    createSettings()
+    
+    if isempty(sDict)
+        (decayDict, partDict, q3_aDict, q3_∑Dict, nvDict) = init_Dicts()
+    else
+        decayDict = sDict[1]
+        partDict = sDict[2]
+        q3_aDict = sDict[3]
+        q3_∑Dict = sDict[4]
+        nvDict = init_nvDict()
+    end
+    decayDict = calcDecayCorrection(decayDict)
+    partDict = calcParts(partDict, decayDict)
+    (q3_aDict, q3_∑Dict) = calcFactors(q3_aDict, q3_∑Dict, partDict, decayDict)
+    
+    if isempty(sDict)
+        push!(sDict, decayDict, partDict, q3_aDict, q3_∑Dict)
+    else
+        sDict[1] = decayDict
+        sDict[2] = partDict
+        sDict[3] = q3_aDict
+        sDict[4] = q3_∑Dict
+    end
+
+    y = collect(qs.year[1]:qs.year[2])
+
+    # l = Threads.SpinLock()
+    # Threads.@threads 
+    for i in y  
+        (e, nv_x) = solveAll(i, partDict[string(i)], q3_aDict[string(i)], q3_∑Dict[string(i)], q3_aDict[string(i+1)], q3_∑Dict[string(i+1)])
+
+        if e === nothing
+            push!(nvDict, string(i) => nv_x)
+        else
+            push!(nvDict, string(i) => e)
+        end
+        # Threads.lock(l)
+            b["pbar"].:fraction[Float64] = length(nvDict)/length(y)
+            # jj[]
+        # Threads.unlock(l)
     end
     q_10us = b["swt_10us_calc"].:active[Bool]
     global qs = Settings(q_nv, q_year, q_gauge, q_target, q_treshold, q_refdate, q_paths, q_10us)

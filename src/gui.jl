@@ -1,8 +1,12 @@
 using Gtk
 # global b = GtkBuilder(filename = joinpath(pwd(), prefix, "nuve.glade"))
 
-# include(joinpath(prefix, "signals.jl"))
-# include(joinpath(prefix, "callbacks.jl"))
+import Base.popfirst!
+popfirst!(x::GtkListStoreLeaf) = deleteat!(x, 1)
+qs = nothing
+old_qs = nothing
+sDict = Dict[]
+rTxt = GtkCellRendererText()
 
 xf_ana = XLSX.readxlsx(joinpath("src", "Vollanalysen.xlsx"))
 
