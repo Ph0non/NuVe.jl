@@ -100,7 +100,7 @@ function getWeightsFromConstraint(x::Array{Constraint,1})
 end
 
 function calcDecayCorrection(decayDict::Dict{String,NamedArray{Float64,2}})
-	if old_qs.nv == qs.nv
+	if (old_qs != nothing) && (old_qs.nv == qs.nv)
 		missed_years = setdiff(getInterval(qs), tryparse.(Int64, collect(keys(decayDict))))
 	else
 		decayDict = Dict{String,NamedArray{Float64,2}}()
@@ -117,7 +117,7 @@ function calcDecayCorrection(decayDict::Dict{String,NamedArray{Float64,2}})
 end
 
 function calcParts(partDict::T, decayDict::T) where {T<:Dict{String,NamedArray{Float64,2}}}
-	if old_qs.nv == qs.nv
+	if (old_qs != nothing) && (old_qs.nv == qs.nv)
 		missed_years = setdiff(tryparse.(Int64, collect(keys(decayDict))), tryparse.(Int64, collect(keys(partDict))))
 	else
 		partDict = Dict{String,NamedArray{Float64,2}}()
@@ -133,7 +133,7 @@ function calcParts(partDict::T, decayDict::T) where {T<:Dict{String,NamedArray{F
 end
 
 function calcFactors(q3_aDict::T, q3_∑Dict::T, partDict::T, decayDict::T) where{T<:Dict{String,NamedArray{Float64,2}}}
-		if old_qs.nv == qs.nv
+	if (old_qs != nothing) && (old_qs.nv == qs.nv)
 		missed_years = setdiff(tryparse.(Int64, collect(keys(decayDict))), tryparse.(Int64, collect(keys(q3_aDict))))
 	else
 		q3_aDict = Dict{String,NamedArray{Float64,2}}()
