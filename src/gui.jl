@@ -5,11 +5,19 @@ popfirst!(x::GtkListStoreLeaf) = deleteat!(x, 1)
 qs = nothing
 old_qs = nothing
 sDict = Dict[]
-rTxt = GtkCellRendererText()
+rTxt_nuc = GtkCellRendererText()
+rTxt_val = GtkCellRendererText()
+rTxt_val.:xalign[Float64] = 1.0
 
-c1 = GtkTreeViewColumn("Nuklid", rTxt, Dict([("text", 0)]) )
+c1 = GtkTreeViewColumn("Nuklid", rTxt_nuc, Dict([("text", 0)]) )
+c2 = GtkTreeViewColumn(" ", rTxt_nuc, Dict([("text", 112)]) )
 c1.:fixed_width[Float64] = 80
-TVCDict = Dict(string(value) =>  GtkTreeViewColumn(string(value), rTxt, Dict([("text", index)]) ) for (index, value) in enumerate([1990:2100;]) )
+TVCDict = Dict(string(value) =>  GtkTreeViewColumn(string(value), rTxt_val, Dict([("text", index)]) ) for (index, value) in enumerate([1990:2100;]) )
+for i in keys(TVCDict)
+    TVCDict[i].:fixed_width[Float64] = 65
+    TVCDict[i].:max_width[Float64] = 65
+    TVCDict[i].:alignment[Float64] = 0.5
+end
 
 xf_ana = XLSX.readxlsx(joinpath("src", "Vollanalysen.xlsx"))
 
@@ -58,11 +66,16 @@ function init_Dicts()
     q3_aDict = Dict{String,NamedArray{Float64,2}}()
     q3_∑Dict = Dict{String,NamedArray{Float64,2}}()
     nvDict = init_nvDict()
-    return decayDict, partDict, q3_aDict, q3_∑Dict, nvDict
+    DlDict = init_DlDict()
+    return decayDict, partDict, q3_aDict, q3_∑Dict, nvDict, DlDict
 end
 
 function init_nvDict()
     nvDict = SortedDict{String,Union{Array{Float64,1}, MOI.TerminationStatusCode}}()
+end
+
+function init_DlDict()
+    DlDict = Dict{String,Union{Float64, MOI.TerminationStatusCode}}()
 end
 
 function init_clearpath()
@@ -117,8 +130,12 @@ end
 "Zeilen hinzufügen"
 function addRows(x::GtkListStoreLeaf, nvDict::SortedDict{String,Union{MOI.TerminationStatusCode, Array{Float64,1}}})
     for j = 1:length(first(nvDict)[2])
-        push!(x, tuple( getNuclidesFromConstraint(c)[j], (0 for i in 1990:qs.year[1]-1)..., (format_numbers(nvDict[i][j]) for i in keys(nvDict))..., (0 for i in qs.year[2]+1:2100)... ) ) # Zeilen
+        push!(x, tuple( getNuclidesFromConstraint(c)[j], (0 for i in 1990:qs.year[1]-1)..., (format_numbers(nvDict[i][j]) for i in keys(nvDict))..., (0 for i in qs.year[2]+1:2100)..., "" ) ) # Zeilen
     end
+end
+
+function addDLRow(x::GtkListStoreLeaf, dlDict::Dict{String,Union{Float64, MOI.TerminationStatusCode}} )
+    push!(x, tuple("Dosis\n[µSv/a]", (0 for i in 1990:qs.year[1]-1)..., (format_numbers(dlDict[i]) for i in keys(dlDict))..., (0 for i in qs.year[2]+1:2100)..., "" ) ) # Zeilen
 end
 
 function format_numbers(x::Float64)
@@ -130,24 +147,33 @@ function format_numbers(x::Float64)
 end
 
 "Werte in Tabelle ändern"
-function change_tv(nvDict::SortedDict{String,Union{MOI.TerminationStatusCode, Array{Float64,1}}} )
+function change_tv(nvDict::SortedDict{String,Union{MOI.TerminationStatusCode, Array{Float64,1}}}, dlDict::Dict{String,Union{Float64, MOI.TerminationStatusCode}} )
     if length(b["ls_result"]) == 0 # Es wurden noch keine Werte in ls_result geschrieben
         addRows(b["ls_result"], nvDict)
+        if b["cbtn_10us_show"].active[Bool]
+            addDLRow(b["ls_result"], dlDict)
+        end
         push!(b["tv_result"], c1)
         for i in string.([qs.year[1]:qs.year[2];])
             push!(b["tv_result"], TVCDict[i])
         end
+        push!(b["tv_result"], c2)
     else
         popRows(b["ls_result"])
         addRows(b["ls_result"], nvDict)
+        if b["cbtn_10us_show"].active[Bool]
+            addDLRow(b["ls_result"], dlDict)
+        end
         popfirst!(b["ls_result"])
 
         for i in string.([old_qs.year[1]:old_qs.year[2];])
             deleteat!(b["tv_result"], TVCDict[i])
         end
+        deleteat!(b["tv_result"], c2)
         for i in string.([qs.year[1]:qs.year[2];])
             push!(b["tv_result"], TVCDict[i])
         end
+        push!(b["tv_result"], c2)
     end
 end
 
