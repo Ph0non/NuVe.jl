@@ -1,5 +1,5 @@
 function cb_nv_changed(widget)
-    println(widget.:active_id[String])
+    init_Dicts()
 end
 
 function cb_cbtn_con_toggled(widget)
@@ -20,21 +20,36 @@ function cb_con_changed(widget)
 end
 
 function cb_tb_calc(widget)
-    q_nv = b["cobo_nv"].:active_id[String] |> Symbol
-    q_year = tryparse.(Int, [b["sp_year_min"].:text[String], b["sp_year_max"].:text[String] ])
-    q_gauge = Symbol[]
-    for i in ["fma", "como", "lb124", "mc", "is"]
-        b["cbtn_" * i].:active[Bool] ? push!(q_gauge, Symbol(i)) : nothing
+    if qs != nothing
+        global old_qs = qs
     end
-    q_target = Symbol(collect(keys(id_proc))[b["cobo_opt"].:active[Int]+1])
-    q_treshold = parse_num_con(b["ent_th"].:text[String]) == nothing ? 1.0 : parse_num_con(b["ent_th"].:text[String])
-    q_refdate = RefDate("1 Jan", "d u")
-    q_paths = Dict{Symbol,Array{String,1}}()
-    for i in q_gauge
-        push!(q_paths, i => [j for j in collect(keys(f.dicts[1]))[1:end-1] if b["cbtn_" * String(i) * "_" * j].:active[Bool] ] )
+    b["pbar"].:fraction[Float64] = 0
+    createSettings()
+    (decayDict, partDict, q3_aDict, q3_∑Dict, nvDict) = init_Dicts()
+    
+    decayDict = calcDecayCorrection(decayDict)
+    partDict = calcParts(partDict, decayDict)
+    (q3_aDict, q3_∑Dict) = calcFactors(q3_aDict, q3_∑Dict, partDict, decayDict)
+    # println(decayDict["2022"])
+    y = collect(qs.year[1]:qs.year[2])
+
+    # l = Threads.SpinLock()
+    # Threads.@threads 
+    for i in y  
+        (e, nv_x) = solveAll(i, partDict[string(i)], q3_aDict[string(i)], q3_∑Dict[string(i)], q3_aDict[string(i+1)], q3_∑Dict[string(i+1)])
+
+        if e === nothing
+            push!(nvDict, string(i) => nv_x)
+        else
+            push!(nvDict, string(i) => e)
+        end
+        # Threads.lock(l)
+            b["pbar"].:fraction[Float64] = length(nvDict)/length(y)
+            # jj[]
+        # Threads.unlock(l)
     end
-    q_10us = b["swt_10us_calc"].:active[Bool]
-    global qs = Settings(q_nv, q_year, q_gauge, q_target, q_treshold, q_refdate, q_paths, q_10us)
+
+    change_tv(nvDict)
 end
 
 function cb_sp_year_min_changed(widget)
@@ -43,8 +58,16 @@ function cb_sp_year_min_changed(widget)
     end
 end
 
+# jj = Threads.Atomic{Int}(0)
+
 function cb_sp_year_max_changed(widget)
     if tryparse(Int64, widget.:text[String]) < tryparse(Int64, b["sp_year_min"].:text[String])
         b["sp_year_min"].:text[String] = widget.:text[String]
+    end
+end
+
+function cb_cbtn_10us_calc(widget)
+    if widget.:active[Bool] == true
+        b["cbtn_10us_show"].:active[Bool] = true
     end
 end

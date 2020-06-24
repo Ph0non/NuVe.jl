@@ -53,7 +53,7 @@ Diese Funktion wandelt einen `DataFrame` in ein `Array{Float64, 2}` um.
 Potentiell fehlende Werte werden durch 0 ersetzt.
 """
 function df2namedarray(x::DataFrame, rowname::String, columnname::String)
-	NamedArray(convert(Array{Float64, 2}, removeMissing(x)[names(x)[2:end]]),
+	NamedArray(convert(Array{Float64, 2}, removeMissing(x)[:, names(x)[2:end]]),
 		( string.(x[:, 1]), string.(names(x))[2:end] ),
 		(rowname, columnname) )
 end
@@ -97,6 +97,87 @@ Diese Funktion wird beispielsweise benötigt, wenn auf die Repräsentativität d
 """
 function getWeightsFromConstraint(x::Array{Constraint,1})
 	[x[i].weight for i=1:length(x) ]
+end
+
+function calcDecayCorrection(decayDict::Dict{String,NamedArray{Float64,2}})
+	if old_qs.nv == qs.nv
+		missed_years = setdiff(getInterval(qs), tryparse.(Int64, collect(keys(decayDict))))
+	else
+		decayDict = Dict{String,NamedArray{Float64,2}}()
+		missed_years = getInterval(qs)
+	end
+	
+	if !isempty(missed_years)
+		q0 = decayCorrection(qs, getSampleFromSource(qs.nv), missed_years)
+		for (key, value) in q0
+			push!(decayDict, key => df2namedarray(value, "samples", "nuclides"))
+		end
+	end
+	return decayDict
+end
+
+function calcParts(partDict::T, decayDict::T) where {T<:Dict{String,NamedArray{Float64,2}}}
+	if old_qs.nv == qs.nv
+		missed_years = setdiff(tryparse.(Int64, collect(keys(decayDict))), tryparse.(Int64, collect(keys(partDict))))
+	else
+		partDict = Dict{String,NamedArray{Float64,2}}()
+		missed_years = getInterval(qs)
+	end
+
+	if !isempty(missed_years)
+		for (key, value) in decayDict
+			push!(partDict, key => value |> nuclideParts)
+		end
+	end
+	return partDict
+end
+
+function calcFactors(q3_aDict::T, q3_∑Dict::T, partDict::T, decayDict::T) where{T<:Dict{String,NamedArray{Float64,2}}}
+		if old_qs.nv == qs.nv
+		missed_years = setdiff(tryparse.(Int64, collect(keys(decayDict))), tryparse.(Int64, collect(keys(q3_aDict))))
+	else
+		q3_aDict = Dict{String,NamedArray{Float64,2}}()
+		q3_∑Dict = Dict{String,NamedArray{Float64,2}}()
+		missed_years = getInterval(qs)
+	end
+
+	if !isempty(missed_years)
+		for (key, value) in partDict
+			(q3a, q3∑) = value |> CalcFactors
+			push!(q3_aDict, key => q3a)
+			push!(q3_∑Dict, key => q3∑)
+		end
+	end
+	return q3_aDict, q3_∑Dict
+end
+
+function createSettings()
+	q_nv = b["cobo_nv"].:active_id[String] |> Symbol
+    q_year = tryparse.(Int, [b["sp_year_min"].:text[String], b["sp_year_max"].:text[String] ])
+    q_gauge = Symbol[]
+    for i in ["fma", "como", "lb124", "mc", "is"]
+        b["cbtn_" * i].:active[Bool] ? push!(q_gauge, Symbol(i)) : nothing
+    end
+    q_target = Symbol(collect(keys(id_proc))[b["cobo_opt"].:active[Int]+1])
+    q_treshold = parse_num_con(b["ent_th"].:text[String]) == nothing ? 1.0 : parse_num_con(b["ent_th"].:text[String])
+    q_refdate = RefDate("1 Jan", "d u")
+    q_paths = Dict{Symbol,Array{String,1}}()
+    for i in q_gauge
+        push!(q_paths, i => [j for j in collect(keys(f.dicts[1]))[1:end-1] if b["cbtn_" * String(i) * "_" * j].:active[Bool] ] )
+    end
+    q_10us = b["cbtn_10us_calc"].:active[Bool]
+    global qs = Settings(q_nv, q_year, q_gauge, q_target, q_treshold, q_refdate, q_paths, q_10us)
+end
+
+function solveAll(i::Int64, part::T, q3_a1::T, q3_∑1::T,  q3_a2::T, q3_∑2::T) where {T<:NamedArray{Float64,2}}
+	global (m, x) = defineModel(qs, c, part, q3_a1, q3_∑1, q3_a2, q3_∑2)
+    if qs.tenuSv == false
+        e = solveStd()
+    else
+        e = solve10()
+    end
+
+	return e, nv_x
 end
 
 # export SQLite to XLSX

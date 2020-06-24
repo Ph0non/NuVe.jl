@@ -24,9 +24,6 @@ function nvdb()
 	SQLite.DB(db)
 end
 
-"Die Halbwertszeiten aller Nuklide"
-# const hl = DBInterface.execute(nvdb(), "select " * array2string(nu_names) * " from halflife") |> DataFrame
-
 "Die Freigabewerte aller Nuklide"
 # const clearance_val = df2namedarray(readDb("clearance_val"), "path", "nuclide")
 function fun_clearance_val()
@@ -37,6 +34,9 @@ const clearance_val = fun_clearance_val()
 
 "Die Namen aller verwendeten Nuklide"
 const nu_names = clearance_val.dicts[2] |> keys .|> String
+
+"Die Halbwertszeiten aller Nuklide"
+const hl = DBInterface.execute(nvdb(), "select " * array2string(nu_names) * " from halflife") |> DataFrame
 
 "Die Messeffizienzen für die verschiedenen Messverfahren und Nuklide"
 const ɛ = df2namedarray(readDb("efficiency"), "method", "nuclide")
@@ -61,7 +61,7 @@ end
 Ruft alle vorhanden Proben zu einem Nuklidvektor ab.
 """
 function getSampleFromSource(nv::Symbol)
-	q = XLSX.getdata(xf_ana["A01"]) |> permutedims
+	q = XLSX.getdata(xf_ana[string(nv)]) |> permutedims
 	dt = [Int; Date; repeat([float], 32)]
 	q2 = DataFrame(q[2:end, :], Symbol.(q[1,:]))
 	for i=1:length(dt)
