@@ -24,17 +24,15 @@ Legt das Optimierungsziel des Modells aufgrund der Einstellungen ([`Settings`](@
 """
 function setObjectives(s::Settings, m::Model, x::Array{VariableRef,1}, parts::NamedArrays.NamedArray, c::Array{Constraint,1})
 	if s.target == :fma
-		@objective(m, Max, sum( ε["fma", getNuclidesFromConstraint(c)] .* x))
+		@objective(m, Max, sum( ε["fma", getNuclidesFromConstraint(c)] .* getWeightsFromConstraint(c) .* x))
 	elseif s.target == :mc
-		@objective(m, Max, sum( ε["mc", getNuclidesFromConstraint(c)] .* x ))
+		@objective(m, Max, sum( ε["mc", getNuclidesFromConstraint(c)] .* getWeightsFromConstraint(c) .* x ))
 	elseif s.target == :como
-		@objective(m, Max, sum( ε["como", getNuclidesFromConstraint(c)] .* x ))
+		@objective(m, Max, sum( ε["como", getNuclidesFromConstraint(c)] .* getWeightsFromConstraint(c) .* x ))
 	elseif s.target == :lb124
-		@objective(m, Max, sum( ε["lb124", getNuclidesFromConstraint(c)] .* x ))
+		@objective(m, Max, sum( ε["lb124", getNuclidesFromConstraint(c)] .* getWeightsFromConstraint(c) .* x ))
 	elseif s.target == :is
-		@objective(m, Max, sum( ε["is", getNuclidesFromConstraint(c)] .* x ))
-	# elseif setting.target in keys(readDb("clearance_val").path)
-		# @objective(m, :Max, sum(x .* f_red[setting.target, :]) );
+		@objective(m, Max, sum( ε["is", getNuclidesFromConstraint(c)] .* getWeightsFromConstraint(c) .* x ))
 	elseif s.target == :mean
 		# if isZ01
 			# np_red = mean(np, 1)[:, rel_nuclides]
@@ -142,7 +140,7 @@ function solve10()
     heu_vec = [1/(2^n) for n=1:14]
     koef_vec = zeros(length(heu_vec), length(r))
     iter_ind = zeros(Int64, length(r))
-    iter_max = 30
+	iter_max = 30
 
     for i = 1:iter_max
         JuMP.optimize!(m)
