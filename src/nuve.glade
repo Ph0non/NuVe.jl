@@ -31,6 +31,330 @@
       </row>
     </data>
   </object>
+  <object class="GtkListStore" id="ls_decay">
+    <columns>
+      <!-- column-name gchararray1 -->
+      <column type="gchararray"/>
+      <!-- column-name gchararray2 -->
+      <column type="gchararray"/>
+      <!-- column-name gchararray3 -->
+      <column type="gchararray"/>
+      <!-- column-name gchararray4 -->
+      <column type="gchararray"/>
+      <!-- column-name gchararray5 -->
+      <column type="gchararray"/>
+      <!-- column-name gchararray6 -->
+      <column type="gchararray"/>
+      <!-- column-name gchararray7 -->
+      <column type="gchararray"/>
+      <!-- column-name gchararray8 -->
+      <column type="gchararray"/>
+      <!-- column-name gchararray9 -->
+      <column type="gchararray"/>
+      <!-- column-name gchararray10 -->
+      <column type="gchararray"/>
+      <!-- column-name gchararray11 -->
+      <column type="gchararray"/>
+      <!-- column-name gchararray12 -->
+      <column type="gchararray"/>
+      <!-- column-name gchararray13 -->
+      <column type="gchararray"/>
+      <!-- column-name gchararray14 -->
+      <column type="gchararray"/>
+      <!-- column-name gchararray15 -->
+      <column type="gchararray"/>
+      <!-- column-name gchararray16 -->
+      <column type="gchararray"/>
+      <!-- column-name gchararray17 -->
+      <column type="gchararray"/>
+      <!-- column-name gchararray18 -->
+      <column type="gchararray"/>
+      <!-- column-name gchararray19 -->
+      <column type="gchararray"/>
+      <!-- column-name gchararray20 -->
+      <column type="gchararray"/>
+      <!-- column-name gchararray21 -->
+      <column type="gchararray"/>
+      <!-- column-name gchararray22 -->
+      <column type="gchararray"/>
+      <!-- column-name gchararray23 -->
+      <column type="gchararray"/>
+      <!-- column-name gchararray24 -->
+      <column type="gchararray"/>
+      <!-- column-name gchararray25 -->
+      <column type="gchararray"/>
+      <!-- column-name gchararray26 -->
+      <column type="gchararray"/>
+      <!-- column-name gchararray27 -->
+      <column type="gchararray"/>
+      <!-- column-name gchararray28 -->
+      <column type="gchararray"/>
+      <!-- column-name gchararray29 -->
+      <column type="gchararray"/>
+      <!-- column-name gchararray30 -->
+      <column type="gchararray"/>
+      <!-- column-name gchararray31 -->
+      <column type="gchararray"/>
+      <!-- column-name gchararray32 -->
+      <column type="gchararray"/>
+      <!-- column-name gchararray33 -->
+      <column type="gchararray"/>
+      <!-- column-name gchararray34 -->
+      <column type="gchararray"/>
+      <!-- column-name gchararray35 -->
+      <column type="gchararray"/>
+      <!-- column-name gchararray36 -->
+      <column type="gchararray"/>
+      <!-- column-name gchararray37 -->
+      <column type="gchararray"/>
+      <!-- column-name gchararray38 -->
+      <column type="gchararray"/>
+      <!-- column-name gchararray39 -->
+      <column type="gchararray"/>
+      <!-- column-name gchararray40 -->
+      <column type="gchararray"/>
+      <!-- column-name gchararray41 -->
+      <column type="gchararray"/>
+      <!-- column-name gchararray42 -->
+      <column type="gchararray"/>
+      <!-- column-name gchararray43 -->
+      <column type="gchararray"/>
+      <!-- column-name gchararray44 -->
+      <column type="gchararray"/>
+      <!-- column-name gchararray45 -->
+      <column type="gchararray"/>
+      <!-- column-name gchararray46 -->
+      <column type="gchararray"/>
+      <!-- column-name gchararray47 -->
+      <column type="gchararray"/>
+      <!-- column-name gchararray48 -->
+      <column type="gchararray"/>
+      <!-- column-name gchararray49 -->
+      <column type="gchararray"/>
+      <!-- column-name gchararray50 -->
+      <column type="gchararray"/>
+      <!-- column-name gchararray51 -->
+      <column type="gchararray"/>
+      <!-- column-name gchararray52 -->
+      <column type="gchararray"/>
+      <!-- column-name gchararray53 -->
+      <column type="gchararray"/>
+      <!-- column-name gchararray54 -->
+      <column type="gchararray"/>
+      <!-- column-name gchararray55 -->
+      <column type="gchararray"/>
+      <!-- column-name gchararray56 -->
+      <column type="gchararray"/>
+      <!-- column-name gchararray57 -->
+      <column type="gchararray"/>
+      <!-- column-name gchararray58 -->
+      <column type="gchararray"/>
+      <!-- column-name gchararray59 -->
+      <column type="gchararray"/>
+      <!-- column-name gchararray60 -->
+      <column type="gchararray"/>
+      <!-- column-name gchararray61 -->
+      <column type="gchararray"/>
+      <!-- column-name gchararray62 -->
+      <column type="gchararray"/>
+      <!-- column-name gchararray63 -->
+      <column type="gchararray"/>
+      <!-- column-name gchararray64 -->
+      <column type="gchararray"/>
+      <!-- column-name gchararray65 -->
+      <column type="gchararray"/>
+      <!-- column-name gchararray66 -->
+      <column type="gchararray"/>
+      <!-- column-name gchararray67 -->
+      <column type="gchararray"/>
+      <!-- column-name gchararray68 -->
+      <column type="gchararray"/>
+      <!-- column-name gchararray69 -->
+      <column type="gchararray"/>
+      <!-- column-name gchararray70 -->
+      <column type="gchararray"/>
+      <!-- column-name gchararray71 -->
+      <column type="gchararray"/>
+      <!-- column-name gchararray72 -->
+      <column type="gchararray"/>
+      <!-- column-name gchararray73 -->
+      <column type="gchararray"/>
+      <!-- column-name gchararray74 -->
+      <column type="gchararray"/>
+      <!-- column-name gchararray75 -->
+      <column type="gchararray"/>
+      <!-- column-name gchararray76 -->
+      <column type="gchararray"/>
+      <!-- column-name gchararray77 -->
+      <column type="gchararray"/>
+      <!-- column-name gchararray78 -->
+      <column type="gchararray"/>
+      <!-- column-name gchararray79 -->
+      <column type="gchararray"/>
+      <!-- column-name gchararray80 -->
+      <column type="gchararray"/>
+      <!-- column-name gchararray81 -->
+      <column type="gchararray"/>
+      <!-- column-name gchararray82 -->
+      <column type="gchararray"/>
+      <!-- column-name gchararray83 -->
+      <column type="gchararray"/>
+      <!-- column-name gchararray84 -->
+      <column type="gchararray"/>
+      <!-- column-name gchararray85 -->
+      <column type="gchararray"/>
+      <!-- column-name gchararray86 -->
+      <column type="gchararray"/>
+      <!-- column-name gchararray87 -->
+      <column type="gchararray"/>
+      <!-- column-name gchararray88 -->
+      <column type="gchararray"/>
+      <!-- column-name gchararray89 -->
+      <column type="gchararray"/>
+      <!-- column-name gchararray90 -->
+      <column type="gchararray"/>
+      <!-- column-name gchararray91 -->
+      <column type="gchararray"/>
+      <!-- column-name gchararray92 -->
+      <column type="gchararray"/>
+      <!-- column-name gchararray93 -->
+      <column type="gchararray"/>
+      <!-- column-name gchararray94 -->
+      <column type="gchararray"/>
+      <!-- column-name gchararray95 -->
+      <column type="gchararray"/>
+      <!-- column-name gchararray96 -->
+      <column type="gchararray"/>
+      <!-- column-name gchararray97 -->
+      <column type="gchararray"/>
+      <!-- column-name gchararray98 -->
+      <column type="gchararray"/>
+      <!-- column-name gchararray99 -->
+      <column type="gchararray"/>
+      <!-- column-name gchararray100 -->
+      <column type="gchararray"/>
+      <!-- column-name gchararray101 -->
+      <column type="gchararray"/>
+      <!-- column-name gchararray102 -->
+      <column type="gchararray"/>
+      <!-- column-name gchararray103 -->
+      <column type="gchararray"/>
+      <!-- column-name gchararray104 -->
+      <column type="gchararray"/>
+      <!-- column-name gchararray105 -->
+      <column type="gchararray"/>
+      <!-- column-name gchararray106 -->
+      <column type="gchararray"/>
+      <!-- column-name gchararray107 -->
+      <column type="gchararray"/>
+      <!-- column-name gchararray108 -->
+      <column type="gchararray"/>
+      <!-- column-name gchararray109 -->
+      <column type="gchararray"/>
+      <!-- column-name gchararray110 -->
+      <column type="gchararray"/>
+      <!-- column-name gchararray111 -->
+      <column type="gchararray"/>
+      <!-- column-name gchararray112 -->
+      <column type="gchararray"/>
+      <!-- column-name emptycol -->
+      <column type="gchararray"/>
+    </columns>
+  </object>
+  <object class="GtkWindow" id="decay_window">
+    <property name="can_focus">False</property>
+    <property name="title" translatable="yes">Zerfallskorrektur</property>
+    <property name="window_position">center-always</property>
+    <property name="skip_taskbar_hint">True</property>
+    <child>
+      <object class="GtkBox">
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+        <property name="orientation">vertical</property>
+        <child>
+          <object class="GtkBox">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="margin_left">25</property>
+            <property name="margin_right">25</property>
+            <property name="margin_start">25</property>
+            <property name="margin_end">25</property>
+            <property name="hexpand">True</property>
+            <property name="spacing">50</property>
+            <child>
+              <object class="GtkSpinButton" id="sp_year_decay">
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="max_length">4</property>
+                <property name="text" translatable="yes">1990</property>
+                <property name="input_purpose">digits</property>
+                <property name="adjustment">adjustment1</property>
+                <property name="numeric">True</property>
+                <property name="value">1990</property>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">True</property>
+                <property name="position">0</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkButton">
+                <property name="label" translatable="yes">Nach Excel kopieren</property>
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="receives_default">True</property>
+                <property name="halign">center</property>
+                <property name="valign">center</property>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">True</property>
+                <property name="position">1</property>
+              </packing>
+            </child>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="padding">5</property>
+            <property name="position">1</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkScrolledWindow">
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="shadow_type">in</property>
+            <child>
+              <object class="GtkViewport">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <child>
+                  <object class="GtkTreeView" id="tv_decay">
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="model">ls_decay</property>
+                    <child internal-child="selection">
+                      <object class="GtkTreeSelection"/>
+                    </child>
+                  </object>
+                </child>
+              </object>
+            </child>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="position">2</property>
+          </packing>
+        </child>
+      </object>
+    </child>
+    <child type="titlebar">
+      <placeholder/>
+    </child>
+  </object>
   <object class="GtkListStore" id="ls_nv">
     <columns>
       <!-- column-name gchararray1 -->
@@ -282,6 +606,8 @@
       <object class="GtkBox" id="box_top">
         <property name="visible">True</property>
         <property name="can_focus">False</property>
+        <property name="margin_start">5</property>
+        <property name="margin_end">5</property>
         <property name="orientation">vertical</property>
         <property name="spacing">5</property>
         <child>
@@ -333,21 +659,21 @@
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <child>
-                          <object class="GtkMenuItem" id="tb_decay1">
+                          <object class="GtkMenuItem" id="tb_decay">
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
                             <property name="label" translatable="yes">Zerfallskorrektur</property>
                           </object>
                         </child>
                         <child>
-                          <object class="GtkMenuItem" id="tb_clearval1">
+                          <object class="GtkMenuItem" id="tb_clearval">
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
                             <property name="label" translatable="yes">Freigabewerte</property>
                           </object>
                         </child>
                         <child>
-                          <object class="GtkMenuItem" id="tb_oe1">
+                          <object class="GtkMenuItem" id="tb_oe">
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
                             <property name="label" translatable="yes">Ausschöpfung</property>
@@ -379,7 +705,7 @@
           <packing>
             <property name="expand">False</property>
             <property name="fill">True</property>
-            <property name="position">1</property>
+            <property name="position">2</property>
           </packing>
         </child>
         <child>
@@ -563,6 +889,7 @@
                                               <object class="GtkFrame">
                                                 <property name="visible">True</property>
                                                 <property name="can_focus">False</property>
+                                                <property name="tooltip_text" translatable="yes">Ein Wert kleiner 1 sorgt dafür, dass die Randbedingungen für einen abdeckenden NV leichter erfüllt werden. Dies senkt jedoch auch im gleichen Maße die resultierenden Freigabewerte.</property>
                                                 <property name="label_xalign">0</property>
                                                 <child>
                                                   <object class="GtkAlignment">
@@ -573,7 +900,6 @@
                                                       <object class="GtkEntry" id="ent_th">
                                                         <property name="visible">True</property>
                                                         <property name="can_focus">True</property>
-                                                        <property name="tooltip_text" translatable="yes">Ein Wert kleiner 1 sorgt dafür, dass die Randbedingungen für einen abdeckenden NV leichter erfüllt werden. Dies senkt jedoch auch im gleichen Maße die resultierenden Freigabewerte.</property>
                                                         <property name="halign">center</property>
                                                         <property name="valign">center</property>
                                                         <property name="width_chars">5</property>
@@ -603,6 +929,8 @@
                                               <object class="GtkFrame">
                                                 <property name="visible">True</property>
                                                 <property name="can_focus">False</property>
+                                                <property name="tooltip_text" translatable="yes">Berechnung des 0,95-Perzentils der Dosis für Metallschrott zur Rezyklierung.
+Zusätzlich kann versucht werden, einen NV zu konstruieren, der das 10-µSv-Konzept einhält..</property>
                                                 <property name="label_xalign">0</property>
                                                 <child>
                                                   <object class="GtkAlignment">
@@ -795,6 +1123,7 @@
                                           <object class="GtkFrame">
                                             <property name="visible">True</property>
                                             <property name="can_focus">False</property>
+                                            <property name="tooltip_text" translatable="yes">Als Ziel zur Berechnung eines NV kann eine möglichst hohe Messbarkeit mit dem ausgewählten Messverfahren oder eine möglichst geringe Abweichung zum Probenmittelwert angegeben werden.</property>
                                             <property name="label_xalign">0</property>
                                             <child>
                                               <object class="GtkAlignment">
@@ -806,6 +1135,7 @@
                                                     <property name="name">cobo_opt</property>
                                                     <property name="visible">True</property>
                                                     <property name="can_focus">False</property>
+                                                    <property name="tooltip_text" translatable="yes">Als Ziel zur Berechnung eines NV kann eine möglichst hohe Messbarkeit mit dem ausgewählten Messverfahren oder eine möglichst geringe Abweichung zum Probenmittelwert angegeben werden.</property>
                                                     <property name="valign">center</property>
                                                     <property name="margin_right">10</property>
                                                     <property name="margin_end">10</property>
@@ -938,6 +1268,8 @@ uneingeschränkte Freigabe</property>
                                                             <property name="visible">True</property>
                                                             <property name="can_focus">True</property>
                                                             <property name="receives_default">False</property>
+                                                            <property name="tooltip_text" translatable="yes">Sp. 6
+Bauschutt u. Bodenaushub &gt; 1.000t im Jahr</property>
                                                             <property name="draw_indicator">True</property>
                                                           </object>
                                                         </child>
@@ -956,6 +1288,8 @@ uneingeschränkte Freigabe</property>
                                                             <property name="visible">True</property>
                                                             <property name="can_focus">True</property>
                                                             <property name="receives_default">False</property>
+                                                            <property name="tooltip_text" translatable="yes">Sp. 7
+Bodenflächen</property>
                                                             <property name="draw_indicator">True</property>
                                                           </object>
                                                         </child>
@@ -974,6 +1308,8 @@ uneingeschränkte Freigabe</property>
                                                             <property name="visible">True</property>
                                                             <property name="can_focus">True</property>
                                                             <property name="receives_default">False</property>
+                                                            <property name="tooltip_text" translatable="yes">Sp. 12
+Gebäude zur Wiederverwendung</property>
                                                             <property name="draw_indicator">True</property>
                                                           </object>
                                                         </child>
@@ -992,6 +1328,8 @@ uneingeschränkte Freigabe</property>
                                                             <property name="visible">True</property>
                                                             <property name="can_focus">True</property>
                                                             <property name="receives_default">False</property>
+                                                            <property name="tooltip_text" translatable="yes">Sp. 8
+Deponie &lt; 100t im Jahr</property>
                                                             <property name="draw_indicator">True</property>
                                                           </object>
                                                         </child>
@@ -1010,6 +1348,8 @@ uneingeschränkte Freigabe</property>
                                                             <property name="visible">True</property>
                                                             <property name="can_focus">True</property>
                                                             <property name="receives_default">False</property>
+                                                            <property name="tooltip_text" translatable="yes">Sp. 10
+Deponie &lt; 1000t im Jahr</property>
                                                             <property name="draw_indicator">True</property>
                                                           </object>
                                                         </child>
@@ -1028,6 +1368,8 @@ uneingeschränkte Freigabe</property>
                                                             <property name="visible">True</property>
                                                             <property name="can_focus">True</property>
                                                             <property name="receives_default">False</property>
+                                                            <property name="tooltip_text" translatable="yes">Sp. 9
+Verbrennung &lt; 100t im Jahr</property>
                                                             <property name="draw_indicator">True</property>
                                                           </object>
                                                         </child>
@@ -1046,6 +1388,8 @@ uneingeschränkte Freigabe</property>
                                                             <property name="visible">True</property>
                                                             <property name="can_focus">True</property>
                                                             <property name="receives_default">False</property>
+                                                            <property name="tooltip_text" translatable="yes">Sp. 11
+Verbrennung &lt; 1000t im Jahr</property>
                                                             <property name="draw_indicator">True</property>
                                                           </object>
                                                         </child>
@@ -1064,6 +1408,8 @@ uneingeschränkte Freigabe</property>
                                                             <property name="visible">True</property>
                                                             <property name="can_focus">True</property>
                                                             <property name="receives_default">False</property>
+                                                            <property name="tooltip_text" translatable="yes">Sp. 13
+Gebäude zum Abriss</property>
                                                             <property name="draw_indicator">True</property>
                                                           </object>
                                                         </child>
@@ -1082,6 +1428,8 @@ uneingeschränkte Freigabe</property>
                                                             <property name="visible">True</property>
                                                             <property name="can_focus">True</property>
                                                             <property name="receives_default">False</property>
+                                                            <property name="tooltip_text" translatable="yes">Sp. 14
+Metallschrott zur Rezyklierung</property>
                                                             <property name="draw_indicator">True</property>
                                                           </object>
                                                         </child>
@@ -1100,6 +1448,8 @@ uneingeschränkte Freigabe</property>
                                                             <property name="visible">True</property>
                                                             <property name="can_focus">True</property>
                                                             <property name="receives_default">False</property>
+                                                            <property name="tooltip_text" translatable="yes">Sp. 3
+Bauschutt &lt; 1.000t</property>
                                                             <property name="draw_indicator">True</property>
                                                           </object>
                                                         </child>
@@ -1214,6 +1564,8 @@ uneingeschränkte Freigabe</property>
                                                             <property name="visible">True</property>
                                                             <property name="can_focus">True</property>
                                                             <property name="receives_default">False</property>
+                                                            <property name="tooltip_text" translatable="yes">Sp. 6
+Bauschutt u. Bodenaushub &gt; 1.000t im Jahr</property>
                                                             <property name="draw_indicator">True</property>
                                                             </object>
                                                             </child>
@@ -1232,6 +1584,8 @@ uneingeschränkte Freigabe</property>
                                                             <property name="visible">True</property>
                                                             <property name="can_focus">True</property>
                                                             <property name="receives_default">False</property>
+                                                            <property name="tooltip_text" translatable="yes">Sp. 7
+Bodenflächen</property>
                                                             <property name="draw_indicator">True</property>
                                                             </object>
                                                             </child>
@@ -1250,6 +1604,8 @@ uneingeschränkte Freigabe</property>
                                                             <property name="visible">True</property>
                                                             <property name="can_focus">True</property>
                                                             <property name="receives_default">False</property>
+                                                            <property name="tooltip_text" translatable="yes">Sp. 12
+Gebäude zur Wiederverwendung</property>
                                                             <property name="draw_indicator">True</property>
                                                             </object>
                                                             </child>
@@ -1268,6 +1624,8 @@ uneingeschränkte Freigabe</property>
                                                             <property name="visible">True</property>
                                                             <property name="can_focus">True</property>
                                                             <property name="receives_default">False</property>
+                                                            <property name="tooltip_text" translatable="yes">Sp. 8
+Deponie &lt; 100t im Jahr</property>
                                                             <property name="draw_indicator">True</property>
                                                             </object>
                                                             </child>
@@ -1286,6 +1644,8 @@ uneingeschränkte Freigabe</property>
                                                             <property name="visible">True</property>
                                                             <property name="can_focus">True</property>
                                                             <property name="receives_default">False</property>
+                                                            <property name="tooltip_text" translatable="yes">Sp. 10
+Deponie &lt; 1000t im Jahr</property>
                                                             <property name="draw_indicator">True</property>
                                                             </object>
                                                             </child>
@@ -1304,6 +1664,8 @@ uneingeschränkte Freigabe</property>
                                                             <property name="visible">True</property>
                                                             <property name="can_focus">True</property>
                                                             <property name="receives_default">False</property>
+                                                            <property name="tooltip_text" translatable="yes">Sp. 9
+Verbrennung &lt; 100t im Jahr</property>
                                                             <property name="draw_indicator">True</property>
                                                             </object>
                                                             </child>
@@ -1322,6 +1684,8 @@ uneingeschränkte Freigabe</property>
                                                             <property name="visible">True</property>
                                                             <property name="can_focus">True</property>
                                                             <property name="receives_default">False</property>
+                                                            <property name="tooltip_text" translatable="yes">Sp. 11
+Verbrennung &lt; 1000t im Jahr</property>
                                                             <property name="draw_indicator">True</property>
                                                             </object>
                                                             </child>
@@ -1340,6 +1704,8 @@ uneingeschränkte Freigabe</property>
                                                             <property name="visible">True</property>
                                                             <property name="can_focus">True</property>
                                                             <property name="receives_default">False</property>
+                                                            <property name="tooltip_text" translatable="yes">Sp. 13
+Gebäude zum Abriss</property>
                                                             <property name="draw_indicator">True</property>
                                                             </object>
                                                             </child>
@@ -1358,6 +1724,8 @@ uneingeschränkte Freigabe</property>
                                                             <property name="visible">True</property>
                                                             <property name="can_focus">True</property>
                                                             <property name="receives_default">False</property>
+                                                            <property name="tooltip_text" translatable="yes">Sp. 14
+Metallschrott zur Rezyklierung</property>
                                                             <property name="draw_indicator">True</property>
                                                             </object>
                                                             </child>
@@ -1376,6 +1744,8 @@ uneingeschränkte Freigabe</property>
                                                             <property name="visible">True</property>
                                                             <property name="can_focus">True</property>
                                                             <property name="receives_default">False</property>
+                                                            <property name="tooltip_text" translatable="yes">Sp. 3
+Bauschutt &lt; 1.000t</property>
                                                             <property name="draw_indicator">True</property>
                                                             </object>
                                                             </child>
@@ -1481,6 +1851,8 @@ uneingeschränkte Freigabe</property>
                                                             <property name="visible">True</property>
                                                             <property name="can_focus">True</property>
                                                             <property name="receives_default">False</property>
+                                                            <property name="tooltip_text" translatable="yes">Sp. 6
+Bauschutt u. Bodenaushub &gt; 1.000t im Jahr</property>
                                                             <property name="draw_indicator">True</property>
                                                             </object>
                                                             </child>
@@ -1499,6 +1871,8 @@ uneingeschränkte Freigabe</property>
                                                             <property name="visible">True</property>
                                                             <property name="can_focus">True</property>
                                                             <property name="receives_default">False</property>
+                                                            <property name="tooltip_text" translatable="yes">Sp. 7
+Bodenflächen</property>
                                                             <property name="draw_indicator">True</property>
                                                             </object>
                                                             </child>
@@ -1517,6 +1891,8 @@ uneingeschränkte Freigabe</property>
                                                             <property name="visible">True</property>
                                                             <property name="can_focus">True</property>
                                                             <property name="receives_default">False</property>
+                                                            <property name="tooltip_text" translatable="yes">Sp. 12
+Gebäude zur Wiederverwendung</property>
                                                             <property name="draw_indicator">True</property>
                                                             </object>
                                                             </child>
@@ -1535,6 +1911,8 @@ uneingeschränkte Freigabe</property>
                                                             <property name="visible">True</property>
                                                             <property name="can_focus">True</property>
                                                             <property name="receives_default">False</property>
+                                                            <property name="tooltip_text" translatable="yes">Sp. 8
+Deponie &lt; 100t im Jahr</property>
                                                             <property name="draw_indicator">True</property>
                                                             </object>
                                                             </child>
@@ -1553,6 +1931,8 @@ uneingeschränkte Freigabe</property>
                                                             <property name="visible">True</property>
                                                             <property name="can_focus">True</property>
                                                             <property name="receives_default">False</property>
+                                                            <property name="tooltip_text" translatable="yes">Sp. 10
+Deponie &lt; 1000t im Jahr</property>
                                                             <property name="draw_indicator">True</property>
                                                             </object>
                                                             </child>
@@ -1571,6 +1951,8 @@ uneingeschränkte Freigabe</property>
                                                             <property name="visible">True</property>
                                                             <property name="can_focus">True</property>
                                                             <property name="receives_default">False</property>
+                                                            <property name="tooltip_text" translatable="yes">Sp. 9
+Verbrennung &lt; 100t im Jahr</property>
                                                             <property name="draw_indicator">True</property>
                                                             </object>
                                                             </child>
@@ -1589,6 +1971,8 @@ uneingeschränkte Freigabe</property>
                                                             <property name="visible">True</property>
                                                             <property name="can_focus">True</property>
                                                             <property name="receives_default">False</property>
+                                                            <property name="tooltip_text" translatable="yes">Sp. 11
+Verbrennung &lt; 1000t im Jahr</property>
                                                             <property name="draw_indicator">True</property>
                                                             </object>
                                                             </child>
@@ -1607,6 +1991,8 @@ uneingeschränkte Freigabe</property>
                                                             <property name="visible">True</property>
                                                             <property name="can_focus">True</property>
                                                             <property name="receives_default">False</property>
+                                                            <property name="tooltip_text" translatable="yes">Sp. 13
+Gebäude zum Abriss</property>
                                                             <property name="draw_indicator">True</property>
                                                             </object>
                                                             </child>
@@ -1625,6 +2011,8 @@ uneingeschränkte Freigabe</property>
                                                             <property name="visible">True</property>
                                                             <property name="can_focus">True</property>
                                                             <property name="receives_default">False</property>
+                                                            <property name="tooltip_text" translatable="yes">Sp. 14
+Metallschrott zur Rezyklierung</property>
                                                             <property name="draw_indicator">True</property>
                                                             </object>
                                                             </child>
@@ -1643,6 +2031,8 @@ uneingeschränkte Freigabe</property>
                                                             <property name="visible">True</property>
                                                             <property name="can_focus">True</property>
                                                             <property name="receives_default">False</property>
+                                                            <property name="tooltip_text" translatable="yes">Sp. 3
+Bauschutt &lt; 1.000t</property>
                                                             <property name="draw_indicator">True</property>
                                                             </object>
                                                             </child>
@@ -1748,6 +2138,8 @@ uneingeschränkte Freigabe</property>
                                                             <property name="visible">True</property>
                                                             <property name="can_focus">True</property>
                                                             <property name="receives_default">False</property>
+                                                            <property name="tooltip_text" translatable="yes">Sp. 6
+Bauschutt u. Bodenaushub &gt; 1.000t im Jahr</property>
                                                             <property name="draw_indicator">True</property>
                                                             </object>
                                                             </child>
@@ -1766,6 +2158,8 @@ uneingeschränkte Freigabe</property>
                                                             <property name="visible">True</property>
                                                             <property name="can_focus">True</property>
                                                             <property name="receives_default">False</property>
+                                                            <property name="tooltip_text" translatable="yes">Sp. 7
+Bodenflächen</property>
                                                             <property name="draw_indicator">True</property>
                                                             </object>
                                                             </child>
@@ -1785,6 +2179,8 @@ uneingeschränkte Freigabe</property>
                                                             <property name="visible">True</property>
                                                             <property name="can_focus">True</property>
                                                             <property name="receives_default">False</property>
+                                                            <property name="tooltip_text" translatable="yes">Sp. 12
+Gebäude zur Wiederverwendung</property>
                                                             <property name="draw_indicator">True</property>
                                                             </object>
                                                             </child>
@@ -1803,6 +2199,8 @@ uneingeschränkte Freigabe</property>
                                                             <property name="visible">True</property>
                                                             <property name="can_focus">True</property>
                                                             <property name="receives_default">False</property>
+                                                            <property name="tooltip_text" translatable="yes">Sp. 8
+Deponie &lt; 100t im Jahr</property>
                                                             <property name="draw_indicator">True</property>
                                                             </object>
                                                             </child>
@@ -1821,6 +2219,8 @@ uneingeschränkte Freigabe</property>
                                                             <property name="visible">True</property>
                                                             <property name="can_focus">True</property>
                                                             <property name="receives_default">False</property>
+                                                            <property name="tooltip_text" translatable="yes">Sp. 10
+Deponie &lt; 1000t im Jahr</property>
                                                             <property name="draw_indicator">True</property>
                                                             </object>
                                                             </child>
@@ -1839,6 +2239,8 @@ uneingeschränkte Freigabe</property>
                                                             <property name="visible">True</property>
                                                             <property name="can_focus">True</property>
                                                             <property name="receives_default">False</property>
+                                                            <property name="tooltip_text" translatable="yes">Sp. 9
+Verbrennung &lt; 100t im Jahr</property>
                                                             <property name="draw_indicator">True</property>
                                                             </object>
                                                             </child>
@@ -1857,6 +2259,8 @@ uneingeschränkte Freigabe</property>
                                                             <property name="visible">True</property>
                                                             <property name="can_focus">True</property>
                                                             <property name="receives_default">False</property>
+                                                            <property name="tooltip_text" translatable="yes">Sp. 11
+Verbrennung &lt; 1000t im Jahr</property>
                                                             <property name="draw_indicator">True</property>
                                                             </object>
                                                             </child>
@@ -1875,6 +2279,8 @@ uneingeschränkte Freigabe</property>
                                                             <property name="visible">True</property>
                                                             <property name="can_focus">True</property>
                                                             <property name="receives_default">False</property>
+                                                            <property name="tooltip_text" translatable="yes">Sp. 13
+Gebäude zum Abriss</property>
                                                             <property name="draw_indicator">True</property>
                                                             </object>
                                                             </child>
@@ -1893,6 +2299,8 @@ uneingeschränkte Freigabe</property>
                                                             <property name="visible">True</property>
                                                             <property name="can_focus">True</property>
                                                             <property name="receives_default">False</property>
+                                                            <property name="tooltip_text" translatable="yes">Sp. 14
+Metallschrott zur Rezyklierung</property>
                                                             <property name="draw_indicator">True</property>
                                                             </object>
                                                             </child>
@@ -1911,6 +2319,8 @@ uneingeschränkte Freigabe</property>
                                                             <property name="visible">True</property>
                                                             <property name="can_focus">True</property>
                                                             <property name="receives_default">False</property>
+                                                            <property name="tooltip_text" translatable="yes">Sp. 3
+Bauschutt &lt; 1.000t</property>
                                                             <property name="draw_indicator">True</property>
                                                             </object>
                                                             </child>
@@ -2016,6 +2426,8 @@ uneingeschränkte Freigabe</property>
                                                             <property name="visible">True</property>
                                                             <property name="can_focus">True</property>
                                                             <property name="receives_default">False</property>
+                                                            <property name="tooltip_text" translatable="yes">Sp. 6
+Bauschutt u. Bodenaushub &gt; 1.000t im Jahr</property>
                                                             <property name="draw_indicator">True</property>
                                                             </object>
                                                             </child>
@@ -2034,6 +2446,8 @@ uneingeschränkte Freigabe</property>
                                                             <property name="visible">True</property>
                                                             <property name="can_focus">True</property>
                                                             <property name="receives_default">False</property>
+                                                            <property name="tooltip_text" translatable="yes">Sp. 7
+Bodenflächen</property>
                                                             <property name="draw_indicator">True</property>
                                                             </object>
                                                             </child>
@@ -2052,6 +2466,8 @@ uneingeschränkte Freigabe</property>
                                                             <property name="visible">True</property>
                                                             <property name="can_focus">True</property>
                                                             <property name="receives_default">False</property>
+                                                            <property name="tooltip_text" translatable="yes">Sp. 12
+Gebäude zur Wiederverwendung</property>
                                                             <property name="draw_indicator">True</property>
                                                             </object>
                                                             </child>
@@ -2070,6 +2486,8 @@ uneingeschränkte Freigabe</property>
                                                             <property name="visible">True</property>
                                                             <property name="can_focus">True</property>
                                                             <property name="receives_default">False</property>
+                                                            <property name="tooltip_text" translatable="yes">Sp. 8
+Deponie &lt; 100t im Jahr</property>
                                                             <property name="draw_indicator">True</property>
                                                             </object>
                                                             </child>
@@ -2088,6 +2506,8 @@ uneingeschränkte Freigabe</property>
                                                             <property name="visible">True</property>
                                                             <property name="can_focus">True</property>
                                                             <property name="receives_default">False</property>
+                                                            <property name="tooltip_text" translatable="yes">Sp. 10
+Deponie &lt; 1000t im Jahr</property>
                                                             <property name="draw_indicator">True</property>
                                                             </object>
                                                             </child>
@@ -2106,6 +2526,8 @@ uneingeschränkte Freigabe</property>
                                                             <property name="visible">True</property>
                                                             <property name="can_focus">True</property>
                                                             <property name="receives_default">False</property>
+                                                            <property name="tooltip_text" translatable="yes">Sp. 9
+Verbrennung &lt; 100t im Jahr</property>
                                                             <property name="draw_indicator">True</property>
                                                             </object>
                                                             </child>
@@ -2124,6 +2546,8 @@ uneingeschränkte Freigabe</property>
                                                             <property name="visible">True</property>
                                                             <property name="can_focus">True</property>
                                                             <property name="receives_default">False</property>
+                                                            <property name="tooltip_text" translatable="yes">Sp. 11
+Verbrennung &lt; 1000t im Jahr</property>
                                                             <property name="draw_indicator">True</property>
                                                             </object>
                                                             </child>
@@ -2142,6 +2566,8 @@ uneingeschränkte Freigabe</property>
                                                             <property name="visible">True</property>
                                                             <property name="can_focus">True</property>
                                                             <property name="receives_default">False</property>
+                                                            <property name="tooltip_text" translatable="yes">Sp. 13
+Gebäude zum Abriss</property>
                                                             <property name="draw_indicator">True</property>
                                                             </object>
                                                             </child>
@@ -2160,6 +2586,8 @@ uneingeschränkte Freigabe</property>
                                                             <property name="visible">True</property>
                                                             <property name="can_focus">True</property>
                                                             <property name="receives_default">False</property>
+                                                            <property name="tooltip_text" translatable="yes">Sp. 14
+Metallschrott zur Rezyklierung</property>
                                                             <property name="draw_indicator">True</property>
                                                             </object>
                                                             </child>
@@ -2178,6 +2606,8 @@ uneingeschränkte Freigabe</property>
                                                             <property name="visible">True</property>
                                                             <property name="can_focus">True</property>
                                                             <property name="receives_default">False</property>
+                                                            <property name="tooltip_text" translatable="yes">Sp. 3
+Bauschutt &lt; 1.000t</property>
                                                             <property name="draw_indicator">True</property>
                                                             </object>
                                                             </child>
@@ -2347,6 +2777,7 @@ uneingeschränkte Freigabe</property>
                                                     <property name="name">cbtn_u233</property>
                                                     <property name="visible">True</property>
                                                     <property name="can_focus">True</property>
+                                                    <property name="tooltip_text" translatable="yes">Gewichtung des Nuklides für die Optimierung. Standard = 1</property>
                                                     <property name="valign">center</property>
                                                     <property name="width_chars">8</property>
                                                     <property name="placeholder_text" translatable="yes">Wichtung</property>
@@ -2429,6 +2860,7 @@ uneingeschränkte Freigabe</property>
                                                     <property name="name">cbtn_u234</property>
                                                     <property name="visible">True</property>
                                                     <property name="can_focus">True</property>
+                                                    <property name="tooltip_text" translatable="yes">Gewichtung des Nuklides für die Optimierung. Standard = 1</property>
                                                     <property name="valign">center</property>
                                                     <property name="width_chars">8</property>
                                                     <property name="placeholder_text" translatable="yes">Wichtung</property>
@@ -2511,6 +2943,7 @@ uneingeschränkte Freigabe</property>
                                                     <property name="name">cbtn_u235</property>
                                                     <property name="visible">True</property>
                                                     <property name="can_focus">True</property>
+                                                    <property name="tooltip_text" translatable="yes">Gewichtung des Nuklides für die Optimierung. Standard = 1</property>
                                                     <property name="valign">center</property>
                                                     <property name="width_chars">8</property>
                                                     <property name="placeholder_text" translatable="yes">Wichtung</property>
@@ -2593,6 +3026,7 @@ uneingeschränkte Freigabe</property>
                                                     <property name="name">cbtn_u238</property>
                                                     <property name="visible">True</property>
                                                     <property name="can_focus">True</property>
+                                                    <property name="tooltip_text" translatable="yes">Gewichtung des Nuklides für die Optimierung. Standard = 1</property>
                                                     <property name="valign">center</property>
                                                     <property name="width_chars">8</property>
                                                     <property name="placeholder_text" translatable="yes">Wichtung</property>
@@ -2675,6 +3109,7 @@ uneingeschränkte Freigabe</property>
                                                     <property name="name">cbtn_pu238</property>
                                                     <property name="visible">True</property>
                                                     <property name="can_focus">True</property>
+                                                    <property name="tooltip_text" translatable="yes">Gewichtung des Nuklides für die Optimierung. Standard = 1</property>
                                                     <property name="valign">center</property>
                                                     <property name="width_chars">8</property>
                                                     <property name="placeholder_text" translatable="yes">Wichtung</property>
@@ -2764,6 +3199,7 @@ Pu240</property>
                                                     <property name="name">cbtn_pu239pu240</property>
                                                     <property name="visible">True</property>
                                                     <property name="can_focus">True</property>
+                                                    <property name="tooltip_text" translatable="yes">Gewichtung des Nuklides für die Optimierung. Standard = 1</property>
                                                     <property name="valign">center</property>
                                                     <property name="width_chars">8</property>
                                                     <property name="placeholder_text" translatable="yes">Wichtung</property>
@@ -2846,6 +3282,7 @@ Pu240</property>
                                                     <property name="name">cbtn_am241</property>
                                                     <property name="visible">True</property>
                                                     <property name="can_focus">True</property>
+                                                    <property name="tooltip_text" translatable="yes">Gewichtung des Nuklides für die Optimierung. Standard = 1</property>
                                                     <property name="valign">center</property>
                                                     <property name="width_chars">8</property>
                                                     <property name="placeholder_text" translatable="yes">Wichtung</property>
@@ -2928,6 +3365,7 @@ Pu240</property>
                                                     <property name="name">cbtn_cm242</property>
                                                     <property name="visible">True</property>
                                                     <property name="can_focus">True</property>
+                                                    <property name="tooltip_text" translatable="yes">Gewichtung des Nuklides für die Optimierung. Standard = 1</property>
                                                     <property name="valign">center</property>
                                                     <property name="width_chars">8</property>
                                                     <property name="placeholder_text" translatable="yes">Wichtung</property>
@@ -3010,6 +3448,7 @@ Pu240</property>
                                                     <property name="name">cbtn_cm244</property>
                                                     <property name="visible">True</property>
                                                     <property name="can_focus">True</property>
+                                                    <property name="tooltip_text" translatable="yes">Gewichtung des Nuklides für die Optimierung. Standard = 1</property>
                                                     <property name="valign">center</property>
                                                     <property name="width_chars">8</property>
                                                     <property name="placeholder_text" translatable="yes">Wichtung</property>
@@ -3101,6 +3540,7 @@ Pu240</property>
                                                     <property name="name">cbtn_sa</property>
                                                     <property name="visible">True</property>
                                                     <property name="can_focus">True</property>
+                                                    <property name="tooltip_text" translatable="yes">Gewichtung des Nuklides für die Optimierung. Standard = 1</property>
                                                     <property name="valign">center</property>
                                                     <property name="width_chars">8</property>
                                                     <property name="placeholder_text" translatable="yes">Wichtung</property>
@@ -3218,6 +3658,7 @@ Pu240</property>
                                                     <property name="name">cbtn_h3</property>
                                                     <property name="visible">True</property>
                                                     <property name="can_focus">True</property>
+                                                    <property name="tooltip_text" translatable="yes">Gewichtung des Nuklides für die Optimierung. Standard = 1</property>
                                                     <property name="valign">center</property>
                                                     <property name="width_chars">8</property>
                                                     <property name="placeholder_text" translatable="yes">Wichtung</property>
@@ -3300,6 +3741,7 @@ Pu240</property>
                                                     <property name="name">cbtn_c14</property>
                                                     <property name="visible">True</property>
                                                     <property name="can_focus">True</property>
+                                                    <property name="tooltip_text" translatable="yes">Gewichtung des Nuklides für die Optimierung. Standard = 1</property>
                                                     <property name="valign">center</property>
                                                     <property name="width_chars">8</property>
                                                     <property name="placeholder_text" translatable="yes">Wichtung</property>
@@ -3382,6 +3824,7 @@ Pu240</property>
                                                     <property name="name">cbtn_fe55</property>
                                                     <property name="visible">True</property>
                                                     <property name="can_focus">True</property>
+                                                    <property name="tooltip_text" translatable="yes">Gewichtung des Nuklides für die Optimierung. Standard = 1</property>
                                                     <property name="valign">center</property>
                                                     <property name="width_chars">8</property>
                                                     <property name="placeholder_text" translatable="yes">Wichtung</property>
@@ -3464,6 +3907,7 @@ Pu240</property>
                                                     <property name="name">cbtn_ni59</property>
                                                     <property name="visible">True</property>
                                                     <property name="can_focus">True</property>
+                                                    <property name="tooltip_text" translatable="yes">Gewichtung des Nuklides für die Optimierung. Standard = 1</property>
                                                     <property name="valign">center</property>
                                                     <property name="width_chars">8</property>
                                                     <property name="placeholder_text" translatable="yes">Wichtung</property>
@@ -3546,6 +3990,7 @@ Pu240</property>
                                                     <property name="name">cbtn_ni63</property>
                                                     <property name="visible">True</property>
                                                     <property name="can_focus">True</property>
+                                                    <property name="tooltip_text" translatable="yes">Gewichtung des Nuklides für die Optimierung. Standard = 1</property>
                                                     <property name="valign">center</property>
                                                     <property name="width_chars">8</property>
                                                     <property name="placeholder_text" translatable="yes">Wichtung</property>
@@ -3628,6 +4073,7 @@ Pu240</property>
                                                     <property name="name">cbtn_sr90</property>
                                                     <property name="visible">True</property>
                                                     <property name="can_focus">True</property>
+                                                    <property name="tooltip_text" translatable="yes">Gewichtung des Nuklides für die Optimierung. Standard = 1</property>
                                                     <property name="valign">center</property>
                                                     <property name="width_chars">8</property>
                                                     <property name="placeholder_text" translatable="yes">Wichtung</property>
@@ -3710,6 +4156,7 @@ Pu240</property>
                                                     <property name="name">cbtn_pu241</property>
                                                     <property name="visible">True</property>
                                                     <property name="can_focus">True</property>
+                                                    <property name="tooltip_text" translatable="yes">Gewichtung des Nuklides für die Optimierung. Standard = 1</property>
                                                     <property name="valign">center</property>
                                                     <property name="width_chars">8</property>
                                                     <property name="placeholder_text" translatable="yes">Wichtung</property>
@@ -3801,6 +4248,7 @@ Pu240</property>
                                                     <property name="name">cbtn_sb</property>
                                                     <property name="visible">True</property>
                                                     <property name="can_focus">True</property>
+                                                    <property name="tooltip_text" translatable="yes">Gewichtung des Nuklides für die Optimierung. Standard = 1</property>
                                                     <property name="valign">center</property>
                                                     <property name="width_chars">8</property>
                                                     <property name="placeholder_text" translatable="yes">Wichtung</property>
@@ -3919,6 +4367,7 @@ Pu240</property>
                                                     <property name="name">cbtn_mn54</property>
                                                     <property name="visible">True</property>
                                                     <property name="can_focus">True</property>
+                                                    <property name="tooltip_text" translatable="yes">Gewichtung des Nuklides für die Optimierung. Standard = 1</property>
                                                     <property name="valign">center</property>
                                                     <property name="width_chars">8</property>
                                                     <property name="placeholder_text" translatable="yes">Wichtung</property>
@@ -4001,6 +4450,7 @@ Pu240</property>
                                                     <property name="name">cbtn_co57</property>
                                                     <property name="visible">True</property>
                                                     <property name="can_focus">True</property>
+                                                    <property name="tooltip_text" translatable="yes">Gewichtung des Nuklides für die Optimierung. Standard = 1</property>
                                                     <property name="valign">center</property>
                                                     <property name="width_chars">8</property>
                                                     <property name="placeholder_text" translatable="yes">Wichtung</property>
@@ -4083,6 +4533,7 @@ Pu240</property>
                                                     <property name="name">cbtn_co60</property>
                                                     <property name="visible">True</property>
                                                     <property name="can_focus">True</property>
+                                                    <property name="tooltip_text" translatable="yes">Gewichtung des Nuklides für die Optimierung. Standard = 1</property>
                                                     <property name="valign">center</property>
                                                     <property name="width_chars">8</property>
                                                     <property name="placeholder_text" translatable="yes">Wichtung</property>
@@ -4165,6 +4616,7 @@ Pu240</property>
                                                     <property name="name">cbtn_zn65</property>
                                                     <property name="visible">True</property>
                                                     <property name="can_focus">True</property>
+                                                    <property name="tooltip_text" translatable="yes">Gewichtung des Nuklides für die Optimierung. Standard = 1</property>
                                                     <property name="valign">center</property>
                                                     <property name="width_chars">8</property>
                                                     <property name="placeholder_text" translatable="yes">Wichtung</property>
@@ -4247,6 +4699,7 @@ Pu240</property>
                                                     <property name="name">cbtn_nb94</property>
                                                     <property name="visible">True</property>
                                                     <property name="can_focus">True</property>
+                                                    <property name="tooltip_text" translatable="yes">Gewichtung des Nuklides für die Optimierung. Standard = 1</property>
                                                     <property name="valign">center</property>
                                                     <property name="width_chars">8</property>
                                                     <property name="placeholder_text" translatable="yes">Wichtung</property>
@@ -4329,6 +4782,7 @@ Pu240</property>
                                                     <property name="name">cbtn_ru106</property>
                                                     <property name="visible">True</property>
                                                     <property name="can_focus">True</property>
+                                                    <property name="tooltip_text" translatable="yes">Gewichtung des Nuklides für die Optimierung. Standard = 1</property>
                                                     <property name="valign">center</property>
                                                     <property name="width_chars">8</property>
                                                     <property name="placeholder_text" translatable="yes">Wichtung</property>
@@ -4411,6 +4865,7 @@ Pu240</property>
                                                     <property name="name">cbtn_ag108m</property>
                                                     <property name="visible">True</property>
                                                     <property name="can_focus">True</property>
+                                                    <property name="tooltip_text" translatable="yes">Gewichtung des Nuklides für die Optimierung. Standard = 1</property>
                                                     <property name="valign">center</property>
                                                     <property name="width_chars">8</property>
                                                     <property name="placeholder_text" translatable="yes">Wichtung</property>
@@ -4493,6 +4948,7 @@ Pu240</property>
                                                     <property name="name">cbtn_ag110m</property>
                                                     <property name="visible">True</property>
                                                     <property name="can_focus">True</property>
+                                                    <property name="tooltip_text" translatable="yes">Gewichtung des Nuklides für die Optimierung. Standard = 1</property>
                                                     <property name="valign">center</property>
                                                     <property name="width_chars">8</property>
                                                     <property name="placeholder_text" translatable="yes">Wichtung</property>
@@ -4575,6 +5031,7 @@ Pu240</property>
                                                     <property name="name">cbtn_sb125</property>
                                                     <property name="visible">True</property>
                                                     <property name="can_focus">True</property>
+                                                    <property name="tooltip_text" translatable="yes">Gewichtung des Nuklides für die Optimierung. Standard = 1</property>
                                                     <property name="valign">center</property>
                                                     <property name="width_chars">8</property>
                                                     <property name="placeholder_text" translatable="yes">Wichtung</property>
@@ -4657,6 +5114,7 @@ Pu240</property>
                                                     <property name="name">cbtn_ba133</property>
                                                     <property name="visible">True</property>
                                                     <property name="can_focus">True</property>
+                                                    <property name="tooltip_text" translatable="yes">Gewichtung des Nuklides für die Optimierung. Standard = 1</property>
                                                     <property name="valign">center</property>
                                                     <property name="width_chars">8</property>
                                                     <property name="placeholder_text" translatable="yes">Wichtung</property>
@@ -4739,6 +5197,7 @@ Pu240</property>
                                                     <property name="name">cbtn_cs134</property>
                                                     <property name="visible">True</property>
                                                     <property name="can_focus">True</property>
+                                                    <property name="tooltip_text" translatable="yes">Gewichtung des Nuklides für die Optimierung. Standard = 1</property>
                                                     <property name="valign">center</property>
                                                     <property name="width_chars">8</property>
                                                     <property name="placeholder_text" translatable="yes">Wichtung</property>
@@ -4821,6 +5280,7 @@ Pu240</property>
                                                     <property name="name">cbtn_cs137</property>
                                                     <property name="visible">True</property>
                                                     <property name="can_focus">True</property>
+                                                    <property name="tooltip_text" translatable="yes">Gewichtung des Nuklides für die Optimierung. Standard = 1</property>
                                                     <property name="valign">center</property>
                                                     <property name="width_chars">8</property>
                                                     <property name="placeholder_text" translatable="yes">Wichtung</property>
@@ -4903,6 +5363,7 @@ Pu240</property>
                                                     <property name="name">cbtn_ce144</property>
                                                     <property name="visible">True</property>
                                                     <property name="can_focus">True</property>
+                                                    <property name="tooltip_text" translatable="yes">Gewichtung des Nuklides für die Optimierung. Standard = 1</property>
                                                     <property name="valign">center</property>
                                                     <property name="width_chars">8</property>
                                                     <property name="placeholder_text" translatable="yes">Wichtung</property>
@@ -4985,6 +5446,7 @@ Pu240</property>
                                                     <property name="name">cbtn_eu152</property>
                                                     <property name="visible">True</property>
                                                     <property name="can_focus">True</property>
+                                                    <property name="tooltip_text" translatable="yes">Gewichtung des Nuklides für die Optimierung. Standard = 1</property>
                                                     <property name="valign">center</property>
                                                     <property name="width_chars">8</property>
                                                     <property name="placeholder_text" translatable="yes">Wichtung</property>
@@ -5067,6 +5529,7 @@ Pu240</property>
                                                     <property name="name">cbtn_eu154</property>
                                                     <property name="visible">True</property>
                                                     <property name="can_focus">True</property>
+                                                    <property name="tooltip_text" translatable="yes">Gewichtung des Nuklides für die Optimierung. Standard = 1</property>
                                                     <property name="valign">center</property>
                                                     <property name="width_chars">8</property>
                                                     <property name="placeholder_text" translatable="yes">Wichtung</property>
@@ -5149,6 +5612,7 @@ Pu240</property>
                                                     <property name="name">cbtn_eu155</property>
                                                     <property name="visible">True</property>
                                                     <property name="can_focus">True</property>
+                                                    <property name="tooltip_text" translatable="yes">Gewichtung des Nuklides für die Optimierung. Standard = 1</property>
                                                     <property name="valign">center</property>
                                                     <property name="width_chars">8</property>
                                                     <property name="placeholder_text" translatable="yes">Wichtung</property>
@@ -5240,6 +5704,7 @@ Pu240</property>
                                                     <property name="name">cbtn_sg</property>
                                                     <property name="visible">True</property>
                                                     <property name="can_focus">True</property>
+                                                    <property name="tooltip_text" translatable="yes">Gewichtung des Nuklides für die Optimierung. Standard = 1</property>
                                                     <property name="valign">center</property>
                                                     <property name="width_chars">8</property>
                                                     <property name="placeholder_text" translatable="yes">Wichtung</property>
@@ -5344,7 +5809,7 @@ Pu240</property>
           <packing>
             <property name="expand">False</property>
             <property name="fill">True</property>
-            <property name="position">2</property>
+            <property name="position">3</property>
           </packing>
         </child>
         <child>
@@ -5356,38 +5821,13 @@ Pu240</property>
           <packing>
             <property name="expand">False</property>
             <property name="fill">True</property>
-            <property name="position">3</property>
+            <property name="position">4</property>
           </packing>
         </child>
       </object>
     </child>
     <child type="titlebar">
       <placeholder/>
-    </child>
-  </object>
-  <object class="GtkMenu" id="menu_show">
-    <property name="visible">True</property>
-    <property name="can_focus">False</property>
-    <child>
-      <object class="GtkMenuItem" id="tb_oe">
-        <property name="visible">True</property>
-        <property name="can_focus">False</property>
-        <property name="label" translatable="yes">Überschätzung</property>
-      </object>
-    </child>
-    <child>
-      <object class="GtkMenuItem" id="tb_clearval">
-        <property name="visible">True</property>
-        <property name="can_focus">False</property>
-        <property name="label" translatable="yes">Freigabewerte</property>
-      </object>
-    </child>
-    <child>
-      <object class="GtkMenuItem" id="tb_decay">
-        <property name="visible">True</property>
-        <property name="can_focus">False</property>
-        <property name="label" translatable="yes">Zerfallskorrektur</property>
-      </object>
     </child>
   </object>
 </interface>
