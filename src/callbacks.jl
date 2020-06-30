@@ -20,34 +20,7 @@ function cb_con_changed(widget)
 end
 
 function cb_tb_calc(widget)
-    if qs != nothing
-        global old_qs = qs
-    end
-    b["pbar"].:fraction[Float64] = 0
-    createSettings()
-    
-    if isempty(sDict)
-        (decayDict, partDict, q3_aDict, q3_∑Dict, nvDict, DlDict) = init_Dicts()
-    else
-        decayDict = sDict[1]
-        partDict = sDict[2]
-        q3_aDict = sDict[3]
-        q3_∑Dict = sDict[4]
-        nvDict = init_nvDict()
-        DlDict = init_DlDict()
-    end
-    decayDict = calcDecayCorrection(decayDict)
-    partDict = calcParts(partDict, decayDict)
-    (q3_aDict, q3_∑Dict) = calcFactors(q3_aDict, q3_∑Dict, partDict, decayDict)
-    
-    if isempty(sDict)
-        push!(sDict, decayDict, partDict, q3_aDict, q3_∑Dict)
-    else
-        sDict[1] = decayDict
-        sDict[2] = partDict
-        sDict[3] = q3_aDict
-        sDict[4] = q3_∑Dict
-    end
+    (decayDict, partDict, q3_aDict, q3_∑Dict, nvDict, DlDict) = init_settings()
 
     y = collect(qs.year[1]:qs.year[2])
 
@@ -95,4 +68,13 @@ function cb_cbtn_10us_calc(widget)
     if widget.:active[Bool] == true
         b["cbtn_10us_show"].:active[Bool] = true
     end
+end
+
+function cb_show_decay_btn(widget)
+    b["decay_window"].visible[Bool] = true
+end
+
+function cb_close_btn(widget, event)
+    widget.visible[Bool] = false
+    return true
 end

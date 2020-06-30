@@ -143,26 +143,42 @@ function solve10()
 	iter_max = 30
 
     for i = 1:iter_max
-        JuMP.optimize!(m)
-        if JuMP.termination_status(m) != JuMP.MOI.OPTIMAL 
-            println("Problem unlösbar")
-            return JuMP.termination_status(m)
-        end
-        global nv_x = round.(JuMP.value.(x)./100, digits=2)
+		JuMP.optimize!(m)
+        if JuMP.termination_status(m) == JuMP.MOI.OPTIMAL 
+            # return JuMP.termination_status(m)
+			global nv_x = round.(JuMP.value.(x)./100, digits=2)
 
-        Max_Dosis = checkDose()
-        dos = quantile( fit(LogNormal, Max_Dosis.array), 0.95)
-        (szenario, id_nuc) = nuclideToConstrain()
-        print("JuMP Status: "* string(JuMP.termination_status(m)) * "\nDosis: " * string(round(dos, digits=2)) * " µSv/a\nSzenario: " * szenario * ", Nuklid: " * r[id_nuc] * "\n")
-        global iter_ind[id_nuc] += 1
-        koef_vec[iter_ind[id_nuc], id_nuc] = 1
-        if dos < 9.9
-            iter_ind[id_nuc] == 1 ? break : nothing
-            koef_vec[iter_ind[id_nuc]-1, id_nuc] = 0
-        end
-        set_upper_bound( x[id_nuc], 10_000 * (1 - sum(heu_vec .* koef_vec[:,id_nuc]))  )
-        print("Iteration: " * string(i) * "/" * string(iter_max) * ", new upper bound: " * string( round(100 * (1 - sum(heu_vec .* koef_vec[:,id_nuc]) ), digits=2)) * "%\n\n")
-        maximum(iter_ind) == length(heu_vec) ? break : nothing
+			Max_Dosis = checkDose()
+			dos = quantile( fit(LogNormal, Max_Dosis.array), 0.95)
+			global (szenario, id_nuc) = nuclideToConstrain()
+			print("JuMP Status: "* string(JuMP.termination_status(m)) * "\nDosis: " * string(round(dos, digits=2)) * " µSv/a\nSzenario: " * szenario * ", Nuklid: " * r[id_nuc] * "\n")
+			global iter_ind[id_nuc] += 1
+			koef_vec[iter_ind[id_nuc], id_nuc] = 1
+			if dos < 9.6
+				if iter_ind[id_nuc] == 1 
+					println("Lösung gefunden!")
+					break
+				else
+					nothing
+				end
+				koef_vec[iter_ind[id_nuc]-1, id_nuc] = 0
+			end
+			set_upper_bound( x[id_nuc], 10_000 * (1 - sum(heu_vec .* koef_vec[:,id_nuc]))  )
+			print("Iteration: " * string(i) * "/" * string(iter_max) * ", new upper bound: " * string( round(100 * (1 - sum(heu_vec .* koef_vec[:,id_nuc]) ), digits=2)) * "%\n\n")
+		else
+			println("Problem unlösbar")
+			global iter_ind[id_nuc] += 1
+			koef_vec[iter_ind[id_nuc], id_nuc] = 1		
+			koef_vec[iter_ind[id_nuc]-1, id_nuc] = 0
+			set_upper_bound( x[id_nuc], 10_000 * (1 - sum(heu_vec .* koef_vec[:,id_nuc]))  )
+			print("Iteration: " * string(i) * "/" * string(iter_max) * ", new upper bound: " * string( round(100 * (1 - sum(heu_vec .* koef_vec[:,id_nuc]) ), digits=2)) * "%\n\n")
+		end
+		if maximum(iter_ind) == length(heu_vec) 
+			println("Keine bessere Lösung möglich!")
+			break
+		else
+			nothing
+		end
     end
     return nothing
 end

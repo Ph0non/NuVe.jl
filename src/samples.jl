@@ -1,5 +1,5 @@
 # statistic parameter
-sample_size = 150_000;
+sample_size = 250_000;
 
 # Distributions
 # Einflussgröße = Abgeschnitten( Verteilung( µ. σ ), min, max)

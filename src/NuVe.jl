@@ -1,6 +1,6 @@
 #module NuVe
 using JuMP, Cbc
-using SQLite, NamedArrays, Dates, DataStructures
+using NamedArrays, Dates, DataStructures
 import Statistics.mean, DataFrames.describe
 using DataFrames, Distributions, XLSX
 
@@ -17,6 +17,7 @@ include(joinpath("dists.jl"))
 include(joinpath("samples.jl"))
 include(joinpath("funsDose.jl"))
 include(joinpath("model.jl"))
+include(joinpath("gui.jl"))
 
 # export Types
 export Settings, Constraint, RefDate

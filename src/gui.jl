@@ -11,15 +11,13 @@ rTxt_val.:xalign[Float64] = 1.0
 
 c1 = GtkTreeViewColumn("Nuklid", rTxt_nuc, Dict([("text", 0)]) )
 c2 = GtkTreeViewColumn(" ", rTxt_nuc, Dict([("text", 112)]) )
-c1.:fixed_width[Float64] = 80
+c1.:fixed_width[Float64] = 85
 TVCDict = Dict(string(value) =>  GtkTreeViewColumn(string(value), rTxt_val, Dict([("text", index)]) ) for (index, value) in enumerate([1990:2100;]) )
 for i in keys(TVCDict)
     TVCDict[i].:fixed_width[Float64] = 65
     TVCDict[i].:max_width[Float64] = 65
     TVCDict[i].:alignment[Float64] = 0.5
 end
-
-xf_ana = XLSX.readxlsx(joinpath("src", "Vollanalysen.xlsx"))
 
 function populate_ls_nv()
     empty!(b["ls_nv"])
@@ -52,6 +50,7 @@ end
 function init_sp_year()
     b["sp_year_min"].:text[String] = year(now()) |> string
     b["sp_year_max"].:text[String] = year(now())+5 |> string
+    b["sp_year_decay"].:text[String] = year(now()) |> string
     nothing
 end
 
@@ -138,6 +137,26 @@ function addDLRow(x::GtkListStoreLeaf, dlDict::Dict{String,Union{Float64, MOI.Te
     push!(x, tuple("Dosis\n[µSv/a]", (0 for i in 1990:qs.year[1]-1)..., (format_numbers(dlDict[i]) for i in keys(dlDict))..., (0 for i in qs.year[2]+1:2100)..., "" ) ) # Zeilen
 end
 
+function addRows(x::GtkListStoreLeaf, d::Dict)
+    for j = 1:size(first(sDict[2])[2], 2)
+        push!(b["ls_decay"], tuple( getNuclidesFromConstraint(c)[j], (0 for i in 1990:qs.year[1]-1)..., (format_numbers(nvDict[i][j]) for i in keys(nvDict))..., (0 for i in qs.year[2]+1:2100)..., "" ) ) # Zeilen
+    end
+end
+
+
+# c1_decay_stat = [GtkTreeViewColumn(val, rTxt_nuc, Dict([("text", index)]) ) for (index, val) in enumerate(["Min" "Max" "Mittel"])]
+# c2_decay = GtkTreeViewColumn(" ", rTxt_nuc, Dict([("text", 112+3)]) )
+# TVCDict_decay = Dict(string(value) =>  GtkTreeViewColumn(string(value), rTxt_val, Dict([("text", index+3)]) ) for (index, value) in enumerate([1990:2100;]) )
+# for i in keys(TVCDict_decay)
+#     TVCDict_decay[i].:fixed_width[Float64] = 65
+#     TVCDict_decay[i].:max_width[Float64] = 65
+#     TVCDict_decay[i].:alignment[Float64] = 0.5
+# end
+# # Spalten (Nuklide) alphabetisch sortiert
+# sDict[2]["2022"][:, nu_names |> sort]
+
+
+
 function format_numbers(x::Float64)
     q = replace( string(x), "." => ",")
     if length( q[ findfirst(",", q)[1] : end] ) < 3
@@ -190,4 +209,37 @@ function run_app()
     init_sp_year()
     init_opt()
     init_clearpath()
+end
+
+function init_settings()
+    if qs != nothing
+        global old_qs = qs
+    end
+    b["pbar"].:fraction[Float64] = 0
+    createSettings()
+    
+    if isempty(sDict)
+        (decayDict, partDict, q3_aDict, q3_∑Dict, nvDict, DlDict) = init_Dicts()
+    else
+        decayDict = sDict[1]
+        partDict = sDict[2]
+        q3_aDict = sDict[3]
+        q3_∑Dict = sDict[4]
+        nvDict = init_nvDict()
+        DlDict = init_DlDict()
+    end
+    decayDict = calcDecayCorrection(decayDict)
+    partDict = calcParts(partDict, decayDict)
+    (q3_aDict, q3_∑Dict) = calcFactors(q3_aDict, q3_∑Dict, partDict, decayDict)
+    
+    if isempty(sDict)
+        push!(sDict, decayDict, partDict, q3_aDict, q3_∑Dict)
+    else
+        sDict[1] = decayDict
+        sDict[2] = partDict
+        sDict[3] = q3_aDict
+        sDict[4] = q3_∑Dict
+    end
+
+    return (decayDict, partDict, q3_aDict, q3_∑Dict, nvDict, DlDict)
 end
