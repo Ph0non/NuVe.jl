@@ -26,7 +26,7 @@ function populate_ls_nv()
     end
 end
 
-id_proc = SortedDict("mean" => "Mittelwert", "fma" => "FMA", "is" => "in-situ", "mc" => "MicroCont II", "lb124" => "Lb 124", "como" => "CoMo 170")
+id_proc = SortedDict("mean" => "Mittelwert", "fma" => "FMA", "is" => "in-situ", "mc" => "MicroCont II", "lb124" => "Lb 124", "como" => "CoMo 170", "fgw3a" => "3a")
 function populate_ls_opt()
     empty!(b["ls_opt"])
     for i in keys(id_proc)
@@ -41,7 +41,7 @@ end
 
 function init_desense_con()
     for j in ["cobo", "lmt", "w"]
-        for i in lowercase.(nu_names)
+        for i in [lowercase.(nu_names); "sa"; "sb"; "sg"]
             desense_con_widget(j, i)
         end
     end
@@ -55,7 +55,7 @@ function init_sp_year()
 end
 
 function init_opt()
-    b["cobo_opt"].:active[Int] = 5
+    b["cobo_opt"].:active[Int] = 6
     nothing
 end
 
@@ -74,7 +74,7 @@ function init_nvDict()
 end
 
 function init_DlDict()
-    DlDict = Dict{String,Union{Float64, MOI.TerminationStatusCode}}()
+    DlDict = SortedDict{String,Union{Float64, MOI.TerminationStatusCode}}()
 end
 
 function init_clearpath()
@@ -95,6 +95,17 @@ end
 
 function create_con(nu_str::String)
     nu_sym = nu_names[ lowercase.(nu_names) .== nu_str ][1] |> Symbol
+    # Constraint schon vorhanden? Falls ja, dann löschen und neu erstellen
+    delete_con(nu_sym)
+    con_sym = [:(=), :<, :>][b["cobo_" * nu_str].:active[Int] + 1]
+    lmt = parse_num_con( b["lmt_" * nu_str].:text[String]) == nothing ? 100.0 : parse_num_con( b["lmt_" * nu_str].:text[String])
+    w = parse_num_con( b["w_" * nu_str].:text[String]) == nothing ? 1.0 : parse_num_con( b["w_" * nu_str].:text[String])
+
+    push!(c, Constraint(nu_sym, con_sym, lmt, w))
+end
+
+function create_con_sum(nu_str::String)
+    nu_sym = nu_str |> Symbol
     # Constraint schon vorhanden? Falls ja, dann löschen und neu erstellen
     delete_con(nu_sym)
     
@@ -133,7 +144,7 @@ function addRows(x::GtkListStoreLeaf, nvDict::SortedDict{String,Union{MOI.Termin
     end
 end
 
-function addDLRow(x::GtkListStoreLeaf, dlDict::Dict{String,Union{Float64, MOI.TerminationStatusCode}} )
+function addDLRow(x::GtkListStoreLeaf, dlDict::SortedDict{String,Union{Float64, MOI.TerminationStatusCode}} )
     push!(x, tuple("Dosis\n[µSv/a]", (0 for i in 1990:qs.year[1]-1)..., (format_numbers(dlDict[i]) for i in keys(dlDict))..., (0 for i in qs.year[2]+1:2100)..., "" ) ) # Zeilen
 end
 
@@ -166,7 +177,7 @@ function format_numbers(x::Float64)
 end
 
 "Werte in Tabelle ändern"
-function change_tv(nvDict::SortedDict{String,Union{MOI.TerminationStatusCode, Array{Float64,1}}}, dlDict::Dict{String,Union{Float64, MOI.TerminationStatusCode}} )
+function change_tv(nvDict::SortedDict{String,Union{MOI.TerminationStatusCode, Array{Float64,1}}}, dlDict::SortedDict{String,Union{Float64, MOI.TerminationStatusCode}} ) 
     if length(b["ls_result"]) == 0 # Es wurden noch keine Werte in ls_result geschrieben
         addRows(b["ls_result"], nvDict)
         if b["cbtn_10us_show"].active[Bool]
@@ -225,7 +236,7 @@ function init_settings()
         partDict = sDict[2]
         q3_aDict = sDict[3]
         q3_∑Dict = sDict[4]
-        nvDict = init_nvDict()
+        global nvDict = init_nvDict()
         DlDict = init_DlDict()
     end
     decayDict = calcDecayCorrection(decayDict)

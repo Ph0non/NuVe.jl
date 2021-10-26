@@ -7,6 +7,10 @@ end
 # 	array2string(x)
 # end
 
+function incStrYear(x::String)
+	string(tryparse(Int, x)+1)
+end
+
 """
 	getSampleInfo(x::String, nv::Symbol)
 
@@ -78,6 +82,13 @@ function CalcFactors(x::NamedArrays.NamedArray)
 	∑εᵢxᵢ = x * ɛᵀ
 
 	return ∑xᵢdivfᵢ, ∑εᵢxᵢ
+end
+
+function CalcFactors(y::NamedArrays.NamedArray, nuc::Array{String,1})
+	∑yᵢdivfᵢ = y * fᵀ[nuc, :]
+	∑εᵢyᵢ = y * ɛᵀ[nuc, :]
+
+	return ∑yᵢdivfᵢ, ∑εᵢyᵢ
 end
 
 """
@@ -170,7 +181,9 @@ function createSettings()
 end
 
 function solveAll(i::Int64, part::T, q3_a1::T, q3_∑1::T,  q3_a2::T, q3_∑2::T) where {T<:NamedArray{Float64,2}}
+	# solveAll(i, partDict[string(i)], q3_aDict[string(i)], q3_∑Dict[string(i)], q3_aDict[string(i+1)], q3_∑Dict[string(i+1)])
 	global (m, x) = defineModel(qs, c, part, q3_a1, q3_∑1, q3_a2, q3_∑2)
+	# global (m, x) = defineModel(qs, c, partDict[string(i)], q3_aDict[string(i)], q3_∑Dict[string(i)], q3_aDict[string(i+1)], q3_∑Dict[string(i+1)])
     if qs.tenuSv == false
         e = solveStd()
     else
@@ -180,10 +193,44 @@ function solveAll(i::Int64, part::T, q3_a1::T, q3_∑1::T,  q3_a2::T, q3_∑2::T
 	return e, nv_x
 end
 
+# export content of test_nv() to xlsx-file
+function exportXLSX(n::String)
+	SW = test_nv()
+
+	XLSX.openxlsx(joinpath(pwd(), n * ".xlsx"), mode="w") do xf
+		# erstelle für jedes Jahr ein Tabellenblatt
+		for (key, value) in enumerate(keys(nvDict)) # durch Jahre iterieren
+			XLSX.addsheet!( xf, value )
+
+			for (t_key, t_value) in enumerate(keys(ɛᵀ.dicts[2])) # durch Messgeräte iterieren
+				# Named Array in DataFrame umwnadeln
+				q = SW[value][:, qs.paths[Symbol(t_value)], t_value]
+				df = DataFrame(q, Symbol.(names(q, 2)))
+				insertcols!(df, 1, Symbol("Probennummer") => names(q, 1))
+
+				# Name des Messgerätes hinzufügen
+				xf[key + 1][1, (15 * (t_key - 1) + 1) ] = t_value
+
+				# Daten als Dataframe eintragen
+				XLSX.writetable!(xf[key + 1], collect(DataFrames.eachcol(df)), DataFrames.names(df), anchor_cell=XLSX.CellRef(2, (15 * (t_key - 1) + 1)))
+			end
+		end
+	end
+end
+
+
 # export SQLite to XLSX
-# for i in eachrow(DBInterface.execute(nvdb(), "select NV from nv_summary") |> DataFrame |> sort)
-#     XLSX.openxlsx(joinpath("src", "Vollanalysen.xlsx"), mode="rw") do xf
+# for i in eachrow(DBInterface.execute(nvdb(), "select NV from nv_summary where NV='KWO_DE'") |> DataFrame |> sort)
+#     XLSX.openxlsx(joinpath("src", "Mappe1.xlsx"), mode="rw") do xf
 #         XLSX.addsheet!(xf, i[1])
 #         XLSX.writetable!(xf[i[1]],  collect(DataFrames.eachcol(getSampleFromSource(Symbol(i[1])))), DataFrames.names(getSampleFromSource(Symbol(i[1]))))
 #     end
+# end
+
+# function getSampleFromSource(nv::Symbol)
+# 	q = DBInterface.execute(nvdb(), "select s_id, date, " * array2string(nu_names) *
+# 	" from nv_data join nv_summary on nv_data.nv_id = nv_summary.nv_id where NV = '" *
+# 	(nv |> string) * "'") |> DataFrame
+# 	q.date = map(x->Date(x, "dd.mm.yyyy"), q.date)
+# 	return q
 # end
