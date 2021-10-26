@@ -1,12 +1,19 @@
 
 docs/build/
 docs/site/
+.vscode
+*.workspace
+*.code-workspace
+
+*.xlsx
+~$*.xlsx
+*.glade~
 
 *.jl.cov
 *.jl.*.cov
 *.jl.mem
 
-ini_data.jl
+ini_data*.jl
 
 *.key
 *.ppk

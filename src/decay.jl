@@ -51,7 +51,7 @@ Macht aus den Einstellungen ([`Settings`](@ref)) für Anfangs- und Endjahr ein A
 zusätzlich jedes Jahr dazwischen enthält.
 """
 function getInterval(s::Settings)
-	[s.year[1]:s.year[2];]
+	[s.year[1]:s.year[2]+1;]
 end
 
 """
@@ -61,16 +61,19 @@ Diese Funktion gibt die zerfallskorrigierte Eingangsgröße der Proben eines
 gewählten Nuklidvektors im bei [`Settings`](@ref) angegeben Zeitraum zurück.
 """
 function decayCorrection(s::Settings, sample::DataFrame, year::Array{Int64, 1})
-	sample_array = df2array(sample[Symbol.(nu_names)])
+	sample_array = df2array(sample[:,Symbol.(nu_names)])
 	diff_days = map(x -> x.value, diffDays(s, sample.date, year))
 	hl_array = convert(Array{Float64}, hl)
 
 	sample_decay = Dict()
 	for (index, i) in enumerate(year)
-		push!(sample_decay, string(i) => DataFrame([sample.s_id sample_array .* 2 .^ (-diff_days[:,index] ./ hl_array)], deleteat!(names(sample), 2) ))
+		push!(sample_decay, string(i) => DataFrame(sample_array .* 2 .^ (-diff_days[:,index] ./ hl_array), deleteat!(names(sample), [1, 2]) ))
+		#  Füge die Proben-ID am Anfang ein (die Trennung erfolgte, damit
+		#  die Proben-ID (vorher String, jetzt Int), nicht zu Float wird.
+		insertcols!(sample_decay[string(i)], 1, (names(sample)[1] => sample.s_id))
 
 		# Zerfallskorrektur für Am-241 aus Nachbildung durch Pu-241
-		sample_decay[string(i)].Am241 = coalesce.(sample_decay[string(i)].Am241, 0)
+		sample_decay[string(i)].Am241 = coalesce.(sample_decay[string(i)].Am241, 0.0)
 		sample_decay[string(i)].Am241 .+= coalesce.(sample.Pu241, 0) .* hl.Pu241[1] / (hl.Pu241[1] - hl.Am241[1]) .* (2 .^ (-diff_days[:,index] / hl.Pu241[1]) - 2 .^ (-diff_days[:,index] / hl.Am241[1]) )
 	end
 
