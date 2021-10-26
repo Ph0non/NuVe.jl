@@ -5,6 +5,7 @@ docs/site/
 *.workspace
 *.code-workspace
 
+*.xlsx
 ~$*.xlsx
 *.glade~
 

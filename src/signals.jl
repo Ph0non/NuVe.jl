@@ -1,6 +1,6 @@
 signal_connect((widget) -> cb_nv_changed(widget), b["cobo_nv"], "changed")
 
-
+# connect nuclides
 for i in lowercase.(nu_names)
     signal_connect((widget) -> cb_cbtn_con_toggled(widget), b["cbtn_" * i], "toggled")
 end
@@ -8,6 +8,17 @@ end
 for j in ["cobo", "lmt", "w"]
     for i in lowercase.(nu_names)
         signal_connect((widget) -> cb_con_changed(widget), b[j * "_" * i], "changed")
+    end
+end
+
+# connect sum alpha, sum beta and sum gamma
+for i in ["sa", "sb", "sg"]
+    signal_connect((widget) -> cb_cbtn_con_sum_toggled(widget), b["cbtn_" * i], "toggled")
+end
+
+for j in ["cobo", "lmt", "w"]
+    for i in ["sa", "sb", "sg"]
+        signal_connect((widget) -> cb_con_sum_changed(widget), b[j * "_" * i], "changed")
     end
 end
 

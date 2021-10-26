@@ -75,12 +75,13 @@ Ruft alle vorhanden Proben zu einem Nuklidvektor ab.
 """
 function getSampleFromSource(nv::Symbol)
 	q = XLSX.getdata(xf_ana[string(nv)]) |> permutedims
+	q2 = q[.!ismissing.(q[:,1]), :]
 	dt = [Int; Date; repeat([float], 32)]
-	q2 = DataFrame(q[2:end, :], Symbol.(q[1,:]))
+	q3 = DataFrame(q2[2:end, :], Symbol.(q2[1,:]))
 	for i=1:length(dt)
-		q2[!,i] = dt[i].(q2[!,i])
+		q3[!,i] = dt[i].(q3[!,i])
 	end
-	return q2
+	return q3
 end
 
 "Parameter von Excel-Blatt einlesen für 10µSv-Berechnung"
