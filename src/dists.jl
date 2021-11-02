@@ -1,5 +1,5 @@
 # Distributions
-# Einflussgröße = Abgeschnitten( Verteilung( µ. σ ), min, max)
+# Einflussgröße = Abgeschnitten( Verteilung( µ, σ ), min, max)
 const Einzelmasse = truncated(Normal(200, 300), 5, 300)
 const Ausschöpfung = truncated(Normal(0.3, 0.1), 0.05, 1)
 const Vermischung = truncated(Normal(1.001, 0.001), 1.0, 1.002)

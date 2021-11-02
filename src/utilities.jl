@@ -219,6 +219,40 @@ function exportXLSX(n::String)
 end
 
 
+# export decay correction to xlsx-file
+function exportDC2XLSX(n::String)
+	createSettings()
+	
+	if isempty(sDict)
+        (decayDict, partDict, q3_aDict, q3_∑Dict, nvDict, DlDict) = init_Dicts()
+    else
+        decayDict = sDict[1]
+        partDict = sDict[2]
+    end
+
+	decayDict = calcDecayCorrection(decayDict)
+	partDict = calcParts(partDict, decayDict)
+
+	XLSX.openxlsx(joinpath(pwd(), n * ".xlsx"), mode="w") do xf
+		# erstelle für jedes Jahr ein Tabellenblatt
+		for (key, value) in enumerate(keys(decayDict)) # durch Jahre iterieren
+			XLSX.addsheet!( xf, value )
+
+			# NamedArray transponieren und zum DataFrame machen
+			decayDictᵀ = DataFrame(decayDict[value]', Symbol.(names(decayDict[value], 1)))
+			insertcols!(decayDictᵀ, 1, Symbol("Nuklid") => names(decayDict[value], 2))
+
+			partDictᵀ =  DataFrame(partDict[value]', Symbol.(names(partDict[value], 1)))
+			insertcols!(partDictᵀ, 1, Symbol("Nuklid") => names(partDict[value], 2))
+
+			# Daten als Dataframe eintragen
+			XLSX.writetable!(xf[key + 1], collect(DataFrames.eachcol(decayDictᵀ)), DataFrames.names(decayDictᵀ))
+			XLSX.writetable!(xf[key + 1], collect(DataFrames.eachcol(partDictᵀ)),  DataFrames.names(partDictᵀ), anchor_cell=XLSX.CellRef(1, size(partDict[value])[1] + 2))
+		end
+	end
+end
+
+
 # export SQLite to XLSX
 # for i in eachrow(DBInterface.execute(nvdb(), "select NV from nv_summary where NV='KWO_DE'") |> DataFrame |> sort)
 #     XLSX.openxlsx(joinpath("src", "Mappe1.xlsx"), mode="rw") do xf

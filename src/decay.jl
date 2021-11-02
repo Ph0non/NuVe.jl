@@ -34,6 +34,7 @@ function diffDays(s::Settings, sample_date::Array{Date,1}, year::Int64)
 	Date(year, ref_month, ref_day) .- sample_date
 end
 
+# TODO: Diese Funktion hat noch keinen Nutzen
 function diffDays(sample_date::Date)
 	diffDays([sample_date])
 end
